@@ -1,0 +1,135 @@
+
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0c3955; /* Bleu Twitter */
+  padding: 12px 20px;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  height: 60px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* LOGO + BOUTON MENU MOBILE */
+.navbar__left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+/* NAVIGATION CENTRALE */
+.navbar__nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* OPTIONS À DROITE */
+.navbar__options {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== MENU MOBILE ===== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 260px;
+  height: 100vh;
+  background: #192734; /* Gris foncé Twitter */
+  color: white;
+  transition: left 0.3s ease-in-out;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu.open {
+  left: 0;
+}
+
+.mobile-menu__close {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #E0245E; /* Rouge vif Twitter */
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* ===== FLOATING ACTION BUTTONS (FAB) ===== */
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #06992b; /* Bleu Twitter */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 26px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.fab:hover {
+  background: #1A91DA; /* Bleu clair Twitter */
+}
+
+/* Positionnement des boutons flottants */
+.chat-fab {
+  bottom: 90px;
+  right: 20px;
+}
+
+.shop-fab {
+  bottom: 20px;
+  right: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar__nav {
+    display: none;
+  }
+  
+  .navbar__options {
+    display: none;
+  }
+
+  .fab {
+    bottom: 15%;
+  }
+
+  .chat-fab {
+    bottom: 100px;
+  }
+
+  .shop-fab {
+    bottom: 30px;
+  }
+}

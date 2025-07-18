@@ -1,0 +1,60 @@
+/* src/components/NavMenuWebSite/SearchBar.css */
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .search-bar__icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  
+  .search-bar__input {
+    width: auto;
+    flex: 1;
+    padding: 0px 5px 0px 5px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: #f4f4f9;
+  }
+  
+  .search-bar__input::placeholder {
+    color: #999;
+  }
+  
+  .search-bar__button {
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-bar__button:hover {
+    background-color: #1c5f38;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .search-bar {
+      flex-direction: column;
+    }
+  
+    .search-bar__input,
+    .search-bar__button {
+      width: 100%;
+    }
+  }
+  

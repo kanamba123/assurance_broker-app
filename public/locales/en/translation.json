@@ -1,0 +1,308 @@
+{
+  "about": {
+    "title": "ABOUT US",
+    "whoAreWe": {
+      "title": "Who are we?",
+      "description1": "GISA ANALYTICA is a strategic consulting firm based in Canada, specializing in public policy analysis and economic intelligence applied to emerging markets, particularly in Africa. We combine a systemic economic intelligence methodology with an innovative dual-sided platform to connect top experts with the strategic challenges of governments, institutions, NGOs, and investors.",
+      "description2": "GISA ANALYTICA is built on a dual approach: a systemic economic intelligence methodology and an innovative dual-sided platform connecting clients and high-impact experts."
+    },
+    "analysisIntro": "Our analysis method is based on three pillars:",
+    "analysis": {
+      "point1": "The hierarchical organization of information flows according to their strategic relevance;",
+      "point2": "The integration of invisible variables: implicit norms, institutional dynamics, cultural codes;",
+      "point3": "Prospective modeling to anticipate disruptions and support decision-making.",
+      "highlight": "Our strength: bringing out strategic clarity where opacity prevails."
+    },
+    "international": {
+      "title": "Our international positioning.",
+      "description1": "Based in Canada, GISA ANALYTICA acts as a strategic bridge between the economic priorities of the North and the transformation dynamics of the Global South. We support Canadian and international investors who wish to engage in responsible investments in Africa and other emerging markets by providing them with an in-depth understanding of complex environments and opportunities that meet international standards.",
+      "description2": "GISA ANALYTICA is built on a dual approach: a systemic economic intelligence methodology and an innovative dual-sided platform connecting clients and high-impact experts."
+    },
+    "mission": {
+      "title": "Our Mission.",
+      "intro": "Our mission is twofold:",
+      "point1": "Support African governments, NGOs, and companies in structuring readable, credible projects aligned with donor expectations;",
+      "point2": "Help Canadian investors, companies, and institutions identify sustainable, secure, and strategically relevant opportunities through our tailor-made strategic consulting approach.",
+      "description1": "GISA ANALYTICA thus acts as a catalyst for convergence between local ambitions and global requirements by making high-potential projects actionable in demanding environments.",
+      "description2": "Where others see gray areas, we reveal clear and actionable paths.",
+      "description3": "Where projects get bogged down, we inject method, legitimacy, and leverage to unlock their strategic potential."
+    },
+    "models": {
+      "title": "Our Models",
+      "hybridTitle": "Hybrid Model",
+      "hybridDescription": "Our hybrid model of strategic consulting for emerging markets: active missions + dual-sided platform",
+      "hybrid": {
+        "point1": "Active missions, based on targeted responses to government or institutional tenders...",
+        "point2": "The dual-sided platform, which connects consultants and strategic clients in real time...",
+        "point3": "Prospective modeling to anticipate disruptions and support decision-making."
+      },
+      "businessModelTitle": "Business Model",
+      "business": {
+        "point1": "Premium subscriptions for consultants...",
+        "point2": "Mission-based billing...",
+        "point3": "Specialized training programs..."
+      }
+    },
+    "security": {
+      "title": "Security and Confidentiality",
+      "point1": "All our communications are confidential.",
+      "point2": "We do not receive any hidden commissions from recommended partners.",
+      "point3": "Your data is secure and handled according to the highest professional standards."
+    },
+    "why": {
+      "title": "Why choose GISA ANALYTICA?",
+      "point1": "A unique systemic expertise for unstable environments;",
+      "point2": "Highly qualified PhDs and consultants;",
+      "point3": "A North-South vision rooted in concrete action;",
+      "point4": "An efficient human interface while awaiting the automated platform.",
+      "closing": "We are at your disposal to discuss your specific needs and offer tailored solutions."
+    },
+    "quick": {
+      "missionTitle": "Our Mission",
+      "missionText": "Deliver high-quality analysis and consulting services tailored to our clients’ specific needs.",
+      "visionTitle": "Our Vision",
+      "visionText": "To be the leading reference in analysis and consulting in Burundi and the region."
+    },
+    "values": {
+      "title": "Our Values",
+      "integrityTitle": "Integrity",
+      "integrityText": "Transparency and honesty in all our actions.",
+      "innovationTitle": "Innovation",
+      "innovationText": "Constant pursuit of innovative solutions.",
+      "commitmentTitle": "Commitment",
+      "commitmentText": "Reliable and long-term support for our clients.",
+      "excellenceTitle": "Excellence",
+      "excellenceText": "Quality and professionalism in every project."
+    }
+  },
+  "service": {
+    "title": "Our Services",
+    "loading": "Loading services...",
+    "error": "Error loading services.",
+    "empty": "No services available.",
+    "available": "Available",
+    "unavailable": "Unavailable"
+  },
+  "publications": {
+    "title": "Our Publications",
+    "loginMessage": "Log in to unlock all content and interact with our publications",
+    "loading": "Loading publications...",
+    "errorTitle": "Error loading publications",
+    "errorMessage": "Please try again later",
+    "empty": "No publications available",
+    "checkBack": "Check back later for new content",
+    "premiumContent": "Premium content",
+    "moreChars": "{{count}} more characters",
+    "loginToReadMore": "Log in to read more",
+    "author": "Author",
+    "publishedOn": "Published on",
+    "summary": "Summary",
+    "content": "Content",
+    "loadingDetails": "Loading details...",
+    "errorDetails": "An error occurred while loading the publication.",
+    "noImage": "No image available",
+    "noDescription": "No description provided.",
+    "other_pub": "Others publication"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{current}} of {{total}}"
+  },
+  "clients": {
+    "title": "Client List",
+    "title1": "Our clients",
+    "title2": "Others clients",
+    "add": "Add",
+    "loading": "Loading...",
+    "error": "Loading error.",
+    "modalTitle": "Add a Client",
+    "name": "Name",
+    "email": "Email",
+    "description": "Description",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Your message has been sent successfully.",
+    "error": "An error occurred. Please try again.",
+    "follow": "Follow us on social media",
+    "errorRequired": "This field is required.",
+    "errorEmail": "Invalid email address."
+  },
+  "testimonies": {
+    "title": "Customer Testimonials",
+    "loading": "Loading testimonials...",
+    "error": "Error loading testimonials.",
+    "empty": "No testimonials available.",
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} / {{total}}",
+    "cta": "Leave a Testimony",
+    "modal": {
+      "title": "Share Your Experience",
+      "fields": {
+        "title": "Title",
+        "titlePlaceholder": "Give your testimony a title",
+        "rating": "Your Rating",
+        "details": "Details",
+        "detailsPlaceholder": "Describe your experience in detail..."
+      },
+      "cancel": "Cancel",
+      "submit": "Submit"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "GISA ANALYTICA Inc.",
+      "subtitle": "Strategic consulting firm. Two-sided platform. Systemic expertise.",
+      "description": "Combining research and practice to serve your decisions.",
+      "button": "Our services"
+    },
+    "section1": {
+      "text": "GISA ANALYTICA Inc. mobilizes an international network of researchers, sector experts and seasoned practitioners to support governments, institutions, NGOs, strategic companies and diaspora members in designing, planning and implementing high-impact projects.",
+      "button": "More"
+    },
+    "section2": {
+      "text": "GISA ANALYTICA is not just a consulting firm. It is a community of experts and decision-makers united by a common ambition: to structure the future in the most complex environments, with method, rigor and results.",
+      "button": "More",
+      "imageAlt": "GISA ANALYTICA - Expertise and consulting"
+    },
+    "cta": {
+      "text": "Need more information? Feel free to contact us if you want to know more about our services or for any other assistance request.",
+      "button": "Contact us"
+    }
+  },
+  "navbar": {
+    "home": "Home",
+    "about": "About ",
+    "ourProducts": "Pour products",
+    "location": "Location",
+    "comparator":"comparator",
+    "services": "Services",
+    "clients": "Clients",
+    "experts": "Experts",
+    "publications": "Publications",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "language": "Language",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "My profile",
+    "dashboard": "Dashboard",
+    "account": "My Account",
+    "remaining": "restant(s)"
+  },
+  "footer": {
+    "legalNotice": "Legal Notice",
+    "gdpr": "GDPR",
+    "terms": "Terms of Use",
+    "paymentsTitle": "Accepted Payments",
+    "poweredBy": "- Powered by <0>Gisa Analytica</0>",
+    "excellenceText": "We help businesses design, develop and launch innovative digital products."
+  },
+  "globals": {
+    "appName": "GISA ANALYTICA Inc.",
+    "tagline": "Combining research and practice to support your decisions.",
+    "ctaContact": "Contact us",
+    "ctaLearnMore": "Learn more",
+    "ctaSeeMore": "See more",
+    "ctaBack": "Back",
+    "ctaNext": "Next",
+    "ctaPrevious": "Previous",
+    "ctaSubmit": "Submit",
+    "ctaCancel": "Cancel",
+    "ctaDownload": "Download",
+    "ctaUpload": "Upload",
+    "ctaApply": "Apply",
+    "ctaSubscribe": "Subscribe",
+    "ctaJoin": "Join",
+    "ctaAccess": "Access",
+    "ctaGetStarted": "Get started",
+    "ctaMoreInfo": "More info",
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "message": "Message",
+      "subject": "Subject",
+      "submit": "Send",
+      "reset": "Reset",
+      "successMessage": "Your message was sent successfully.",
+      "errorMessage": "An error occurred. Please try again."
+    },
+    "status": {
+      "loading": "Loading...",
+      "saving": "Saving...",
+      "updating": "Updating...",
+      "sending": "Sending...",
+      "success": "Success",
+      "error": "Error"
+    },
+    "user": {
+      "welcome": "Welcome",
+      "logout": "Log out",
+      "login": "Log in",
+      "signup": "Sign up",
+      "profile": "Profile",
+      "settings": "Settings",
+      "notifications": "Notifications",
+      "myAccount": "My Account"
+    },
+    "validation": {
+      "required": "This field is required.",
+      "invalidEmail": "Invalid email address.",
+      "minLength": "Too short.",
+      "maxLength": "Too long.",
+      "passwordMismatch": "Passwords do not match."
+    },
+    "alerts": {
+      "confirmDelete": "Are you sure you want to delete this item?",
+      "actionSuccessful": "Action completed successfully.",
+      "actionFailed": "Action failed. Please try again."
+    },
+    "date": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "tomorrow": "Tomorrow",
+      "day": "Day",
+      "month": "Month",
+      "year": "Year"
+    },
+    "errors": {
+      "404": "Page not found",
+      "500": "Server error",
+      "network": "Network connection error",
+      "unauthorized": "Unauthorized access",
+      "forbidden": "Access forbidden"
+    },
+    "languages": {
+      "french": "French",
+      "english": "English"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email address",
+    "password": "Password",
+    "submit": "Log in",
+    "no_account": "Don’t have an account yet?",
+    "register_link": "Create an account",
+    "or": "or",
+    "continue_with_google": "Continue with Google",
+    "continue_with_facebook": "Continue with Facebook",
+    "fill_all_fields": "Please fill in all fields.",
+    "invalid_credentials": "Invalid email or password",
+    "invalid_server_response": "Invalid response from the server.",
+    "unknown_error": "An error occurred.",
+    "google_auth_placeholder": "Login with Google (to be implemented)",
+    "facebook_auth_placeholder": "Login with Facebook (to be implemented)"
+  }
+}

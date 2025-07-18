@@ -1,0 +1,61 @@
+/* main.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Utilisation de la hauteur de la fenêtre */
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-container {
+    display: flex;
+    flex: 1; /* Le contenu principal prend tout l'espace disponible */
+}
+
+.sidebar {
+    width: 250px; /* Largeur du SideBar */
+    transition: transform 0.3s ease-in-out; /* Animation de transition pour le SideBar */
+    position: fixed;
+    top: 56px; /* Hauteur de la NavBar */
+    left: 0;
+    bottom: 0;
+    background-color: #343a40; /* Couleur de fond */
+    color: white;
+    overflow-y: auto; /* Défilement vertical si nécessaire */
+    transform: translateX(0);
+}
+
+.sidebar.open {
+    transform: translateX(-250px); /* Déplacer le SideBar hors de la vue */
+}
+
+.content-wrapper {
+    flex: 1; /* Le contenu principal prend tout l'espace disponible */
+    transition: margin-left 0.3s; /* Animation de transition pour le contenu principal */
+    margin-left: 0; /* Décalage initial pour le SideBar */
+    padding: 20px; /* Espacement intérieur pour le contenu */
+    overflow-y: auto; /* Défilement vertical si nécessaire */
+}
+
+.content-wrapper.open {
+    margin-left: 250px; /* Décalage pour tenir compte du SideBar ouvert */
+}
+
+.content {
+    height: 100%; /* Hauteur maximale pour occuper l'espace disponible */
+}
+
+.footer {
+    flex-shrink: 0; /* Empêche le Footer de réduire l'espace du contenu */
+    background-color: #212529;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}

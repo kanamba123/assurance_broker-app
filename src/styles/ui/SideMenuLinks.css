@@ -1,0 +1,35 @@
+/* SideMenuLinks.css */
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text-primary);
+  padding: 10px;
+  display: block;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--color-primary-light);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--color-bg)
+}

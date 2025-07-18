@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Navigation Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        /* Navigation Bar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0 5%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 5%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a3a6c;
+            margin-left: 10px;
+        }
+        
+        .logo-text span {
+            color: #3a86ff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+            padding: 25px 15px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 5px;
+        }
+        
+        .nav-links li a:hover {
+            color: #3a86ff;
+        }
+        
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            width: 0;
+            height: 2px;
+            background: #3a86ff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links li a:hover::after {
+            width: calc(100% - 30px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        
+        .btn-login {
+            background: transparent;
+            border: 1px solid #3a86ff;
+            color: #3a86ff;
+        }
+        
+        .btn-login:hover {
+            background: #3a86ff;
+            color: white;
+        }
+        
+        .btn-contact {
+            background: #3a86ff;
+            color: white;
+            border: 1px solid #3a86ff;
+            box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+        }
+        
+        .btn-contact:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(58, 134, 255, 0.4);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: #3a86ff;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.4s ease;
+            z-index: 999;
+            padding: 20px;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-links {
+            list-style: none;
+        }
+        
+        .mobile-links li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mobile-links li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 18px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-links li a:hover {
+            color: #3a86ff;
+        }
+        
+        /* Demo Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #1a3a6c;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #4a5568;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3a86ff;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            color: #1a3a6c;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjM2E4NmZmIj48cGF0aCBkPSJNMTIsMkExMCwxMCAwIDAsMSAyMiwxMkExMCwxMCAwIDAsMSAxMiwyMkExMCwxMCAwIDAsMSAyLDEyQTEwLDEwIDAgMCwxIDEyLDJNMTIsNEE4LDggMCAwLDAgNCwxMkE4LDggMCAwLDAgMTIsMjBBOCw4IDAgMCwwIDIwLDEyQTgsOCAwIDAsMCAxMiw0TTEyLDZBMywzIDAgMCwxIDE1LDlBMywzIDAgMCwxIDEyLDEyQTMsMyAwIDAsMSA5LDlBMywzIDAgMCwxIDEyLDZNMTIsOEE0LDQgMCAwLDAgOCwxMkE0LDQgMCAwLDAgMTIsMTZBNCw0IDAgMCwwIDE2LDEyQTQsNCAwIDAsMCAxMiw4WiIvPjwvc3ZnPg==" alt="Logo">
+                <div class="logo-text">Fidelia<span>Risk</span></div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Solutions</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> Insights</a></li>
+                <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
+            </ul>
+            
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-login">Client Login</a>
+                <a href="#" class="btn btn-contact">Get in Touch</a>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-links">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Solutions</a></li>
+            <li><a href="#"><i class="fas fa-newspaper"></i> Insights</a></li>
+            <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
+            <li><a href="#" class="btn btn-login" style="display: inline-block; margin-top: 20px; width: 100%; text-align: center;">Client Login</a></li>
+            <li><a href="#" class="btn btn-contact" style="display: inline-block; width: 100%; text-align: center;">Get in Touch</a></li>
+        </ul>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content">
+        <h1>Advanced Risk Management Solutions</h1>
+        <p>We help businesses identify, assess, and mitigate risks through cutting-edge technology and industry expertise. Our comprehensive solutions protect your assets and ensure sustainable growth.</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Risk Assessment</h3>
+                <p>Comprehensive analysis of potential threats to your business operations and financial stability.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Data Analytics</h3>
+                <p>Advanced analytics to identify patterns, predict risks, and optimize your risk management strategy.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Compliance Solutions</h3>
+                <p>Stay compliant with evolving regulations through our tailored compliance management systems.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-links a');
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

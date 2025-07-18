@@ -1,8 +1,7 @@
 
 #root {
-  max-width: 1280px;
+
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -40,4 +39,36 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #3b58b8 #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 1px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 1px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 1px;
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: #3b82f6 #2d3748;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
 }

@@ -1,0 +1,26 @@
+/* Styles pour le menu des produits */
+.card {
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #6c757d; /* Texte gris */
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bleu primaire */
+    border-color: #007bff; /* Couleur de bordure */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Bleu foncé au survol */
+    border-color: #0056b3; /* Couleur de bordure au survol */
+}

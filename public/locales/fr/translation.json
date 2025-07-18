@@ -1,0 +1,308 @@
+{
+  "about": {
+    "title": "À PROPOS DE NOUS",
+    "whoAreWe": {
+      "title": "Qui sommes-nous ?",
+      "description1": "GISA ANALYTICA est un cabinet de conseil stratégique basé au Canada, spécialisé dans l’analyse des politiques publiques et l’intelligence économique appliquée aux marchés émergents, notamment en Afrique. Nous combinons une méthodologie d’intelligence économique systémique et une plateforme biface innovante pour connecter les meilleurs experts aux défis stratégiques des gouvernements, institutions, ONG et investisseurs.",
+      "description2": "GISA ANALYTICA repose sur une double approche : une méthodologie d’intelligence économique systémique et une plateforme biface innovante connectant clients et experts à fort impact"
+    },
+    "analysisIntro": "Notre méthode d’analyse repose sur trois fondements :",
+    "analysis": {
+      "point1": "L’organisation hiérarchisée des flux d’information selon leur pertinence stratégique ;",
+      "point2": "L’intégration des variables invisibles : normes implicites, dynamiques institutionnelles, codes culturels ;",
+      "point3": "La modélisation prospective pour anticiper les ruptures et éclairer la prise de décision.",
+      "highlight": "Notre force : faire émerger la clarté stratégique là où règne l’opacité."
+    },
+    "international": {
+      "title": "Notre positionnement international.",
+      "description1": "Basé au Canada, GISA ANALYTICA agit comme un pont stratégique entre les priorités économiques du Nord et les dynamiques de transformation du Sud global. Nous accompagnons les investisseurs canadiens et internationaux désireux de s'engager dans des investissements responsables en Afrique et dans d'autres marchés émergents, en leur offrant une lecture fine des environnements complexes et des opportunités conformes aux standards internationaux.",
+      "description2": "GISA ANALYTICA repose sur une double approche : une méthodologie d’intelligence économique systémique et une plateforme biface innovante connectant clients et experts à fort impact."
+    },
+    "mission": {
+      "title": "Notre Mission.",
+      "intro": "Notre mission est double :",
+      "point1": "Accompagner les gouvernements, ONG et entreprises africaines dans la structuration de projets lisibles, crédibles et alignés sur les attentes des bailleurs de fonds ;",
+      "point2": "Aider les investisseurs, entreprises et institutions canadiennes à identifier des opportunités durables, sécurisées et stratégiquement pertinentes, grâce à notre approche de conseil stratégique sur mesure.",
+      "description1": "GISA ANALYTICA agit ainsi comme un accélérateur de convergence entre ambitions locales et exigences globales, en rendant mobilisables des projets à fort potentiel dans des environnements exigeants.",
+      "description2": "Là où d’autres perçoivent des zones d’ombre, nous révélons des trajectoires claires et directement actionnables.",
+      "description3": "Là où les projets s’enlisent, nous injectons méthode, légitimité et levier d’action pour en libérer la portée stratégique."
+    },
+    "models": {
+      "title": "Nos Modèles",
+      "hybridTitle": "Modèle hybride",
+      "hybridDescription": "Notre modèle hybride de conseil stratégique pour les marchés émergents : missions actives + plateforme biface",
+      "hybrid": {
+        "point1": "Les missions actives, fondées sur des réponses ciblées à des appels d’offres gouvernementaux ou institutionnels...",
+        "point2": "La plateforme biface, qui connecte en temps réel les consultants et les clients stratégiques...",
+        "point3": "La modélisation prospective pour anticiper les ruptures et éclairer la prise de décision."
+      },
+      "businessModelTitle": "Modèle économique",
+      "business": {
+        "point1": "Abonnements premium pour les consultants...",
+        "point2": "Facturation à la mission...",
+        "point3": "Formations spécialisées..."
+      }
+    },
+    "security": {
+      "title": "Sécurité et confidentialité",
+      "point1": "Tous nos échanges sont confidentiels.",
+      "point2": "Nous ne percevons aucune commission occulte de la part des partenaires recommandés.",
+      "point3": "Vos données sont sécurisées et traitées selon les meilleurs standards professionnels."
+    },
+    "why": {
+      "title": "Pourquoi choisir GISA ANALYTICA ?",
+      "point1": "Une expertise systémique unique pour les environnements instables ;",
+      "point2": "Des docteurs et consultants hautement qualifiés ;",
+      "point3": "Une vision Nord-Sud ancrée dans l’action concrète ;",
+      "point4": "Une interface humaine efficace en attendant la plateforme automatisée.",
+      "closing": "Nous sommes à votre disposition pour discuter de vos besoins spécifiques et vous proposer des solutions adaptées."
+    },
+    "quick": {
+      "missionTitle": "Notre mission",
+      "missionText": " Offrir des services d'analyse et de conseil de qualité, adaptés aux besoins spécifiques de nos clients.",
+      "visionTitle": "Être la référence incontournable en analyse et conseil au Burundi et dans la région.",
+      "visionText": "Être la référence incontournable..."
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "integrityTitle": "Intégrité",
+      "integrityText": " Transparence et honnêteté dans toutes nos actions.",
+      "innovationTitle": "Innovation",
+      "innovationText": "Recherche constante de solutions innovantes.",
+      "commitmentTitle": "Engagement",
+      "commitmentText": "Accompagnement durable et fiable pour nos clients.",
+      "excellenceTitle": "Excellence",
+      "excellenceText": "Qualité et professionnalisme dans chaque projet."
+    }
+  },
+  "service": {
+    "title": "Nos Services",
+    "loading": "Chargement des services...",
+    "error": "Erreur lors du chargement des services.",
+    "empty": "Aucun service disponible.",
+    "available": "Disponible",
+    "unavailable": "Indisponible"
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant",
+    "pageOf": "Page {{current}} / {{total}}"
+  },
+  "publications": {
+    "title": "Nos Publications",
+    "loginMessage": "Connectez-vous pour débloquer tout le contenu et interagir avec nos publications",
+    "loading": "Chargement des publications...",
+    "errorTitle": "Erreur lors du chargement des publications",
+    "errorMessage": "Veuillez réessayer plus tard",
+    "empty": "Aucune publication disponible",
+    "checkBack": "Revenez plus tard pour du nouveau contenu",
+    "premiumContent": "Contenu premium",
+    "moreChars": "{{count}} caractères supplémentaires",
+    "loginToReadMore": "Connectez-vous pour voir la suite",
+    "author": "Auteur",
+    "publishedOn": "Publié le",
+    "summary": "Résumé",
+    "content": "Contenu",
+    "loadingDetails": "Chargement des détails...",
+    "errorDetails": "Une erreur est survenue lors du chargement de la publication.",
+    "noImage": "Aucune image disponible",
+    "noDescription": "Aucune description fournie.",
+    "other_pub":"Autres publication"
+  },
+  "clients": {
+    "title": "Liste des clients",
+    "title1": "Nos clients",
+    "title2": "Autres clients",
+    "add": "Ajouter",
+    "loading": "Chargement...",
+    "error": "Erreur de chargement.",
+    "modalTitle": "Ajouter un client",
+    "name": "Nom",
+    "email": "Email",
+    "description": "Description",
+    "cancel": "Annuler",
+    "save": "Enregistrer"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer",
+    "sending": "Envoi...",
+    "success": "Votre message a été envoyé avec succès.",
+    "error": "Une erreur s’est produite. Veuillez réessayer.",
+    "follow": "Suivez-nous sur les réseaux sociaux",
+    "errorRequired": "Ce champ est requis.",
+    "errorEmail": "Adresse e-mail invalide."
+  },
+  "testimonies": {
+    "title": "Témoignages Clients",
+    "loading": "Chargement des témoignages...",
+    "error": "Erreur lors du chargement des témoignages.",
+    "empty": "Aucun témoignage disponible.",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} / {{total}}",
+    "cta": "Témoigner",
+    "modal": {
+      "title": "Partagez votre expérience",
+      "fields": {
+        "title": "Titre",
+        "titlePlaceholder": "Donnez un titre à votre témoignage",
+        "rating": "Votre note",
+        "details": "Détails",
+        "detailsPlaceholder": "Décrivez votre expérience en détail..."
+      },
+      "cancel": "Annuler",
+      "submit": "Publier"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "GISA ANALYTICA Inc.",
+      "subtitle": "Cabinet de conseil stratégique. Plateforme biface. Expertise systémique.",
+      "description": "Alliance de la recherche et de la pratique au service de vos décisions.",
+      "button": "Nos services"
+    },
+    "section1": {
+      "text": "GISA ANALYTICA Inc. mobilise un réseau international de chercheurs, d'experts sectoriels et de praticiens chevronnés pour accompagner les gouvernements, les institutions, les ONG, les entreprises stratégiques et les membres de la diaspora dans la conception, la planification et la mise en œuvre de projets à fort impact.",
+      "button": "Plus"
+    },
+    "section2": {
+      "text": "GISA ANALYTICA n'est pas un simple cabinet de conseil. C'est une communauté d'experts et de décideurs réunis autour d'une ambition commune : structurer l'avenir dans les environnements les plus complexes, avec méthode, rigueur et résultats.",
+      "button": "Plus",
+      "imageAlt": "GISA ANALYTICA - Expertise et conseil"
+    },
+    "cta": {
+      "text": "Besoin de plus d'informations ? N'hésitez pas à nous contacter si vous souhaitez en savoir plus sur nos services ou pour toute autre demande d'assistance.",
+      "button": "Nous contacter"
+    }
+  },
+  "navbar": {
+    "home": "Accueil",
+    "about": "À propos de nous",
+    "ourProducts": "Nos produits",
+    "location":"Location",
+    "comparator":"Comparateur",
+    "services": "Services",
+    "clients": "Clients",
+    "experts": "Experts",
+    "publications": "Publications",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "language": "Langue",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "profile": "Mon profil",
+    "dashboard": "Tableau de bord",
+    "account": "Mon compte",
+    "remaining": "restant(s)"
+  },
+  "footer": {
+    "legalNotice": "Mentions légales",
+    "gdpr": "RGPDs",
+    "terms": "Conditions d'utilisation",
+    "paymentsTitle": "Paiements acceptés",
+    "poweredBy": "- Propulsé par <0>Gisa Analytica</0>",
+    "excellenceText": "Nous aidons les entreprises à concevoir, développer et lancer des produits numériques innovants."
+  },
+  "globals": {
+    "appName": "GISA ANALYTICA Inc.",
+    "tagline": "Alliance de la recherche et de la pratique au service de vos décisions.",
+    "ctaContact": "Nous contacter",
+    "ctaLearnMore": "En savoir plus",
+    "ctaSeeMore": "Voir plus",
+    "ctaBack": "Retour",
+    "ctaNext": "Suivant",
+    "ctaPrevious": "Précédent",
+    "ctaSubmit": "Soumettre",
+    "ctaCancel": "Annuler",
+    "ctaDownload": "Télécharger",
+    "ctaUpload": "Téléverser",
+    "ctaApply": "Postuler",
+    "ctaSubscribe": "S’abonner",
+    "ctaJoin": "Rejoindre",
+    "ctaAccess": "Accéder",
+    "ctaGetStarted": "Commencer",
+    "ctaMoreInfo": "Plus d'infos",
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse email",
+      "phone": "Téléphone",
+      "message": "Message",
+      "subject": "Sujet",
+      "submit": "Envoyer",
+      "reset": "Réinitialiser",
+      "successMessage": "Votre message a été envoyé avec succès.",
+      "errorMessage": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "status": {
+      "loading": "Chargement...",
+      "saving": "Enregistrement...",
+      "updating": "Mise à jour...",
+      "sending": "Envoi en cours...",
+      "success": "Succès",
+      "error": "Erreur"
+    },
+    "user": {
+      "welcome": "Bienvenue",
+      "logout": "Se déconnecter",
+      "login": "Se connecter",
+      "signup": "Créer un compte",
+      "profile": "Profil",
+      "settings": "Paramètres",
+      "notifications": "Notifications",
+      "myAccount": "Mon compte"
+    },
+    "validation": {
+      "required": "Ce champ est requis.",
+      "invalidEmail": "Adresse email invalide.",
+      "minLength": "Trop court.",
+      "maxLength": "Trop long.",
+      "passwordMismatch": "Les mots de passe ne correspondent pas."
+    },
+    "alerts": {
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet élément ?",
+      "actionSuccessful": "Action réalisée avec succès.",
+      "actionFailed": "L'action a échoué. Veuillez réessayer."
+    },
+    "date": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier",
+      "tomorrow": "Demain",
+      "day": "Jour",
+      "month": "Mois",
+      "year": "Année"
+    },
+    "errors": {
+      "404": "Page non trouvée",
+      "500": "Erreur serveur",
+      "network": "Erreur de connexion réseau",
+      "unauthorized": "Accès non autorisé",
+      "forbidden": "Accès interdit"
+    },
+    "languages": {
+      "french": "Français",
+      "english": "Anglais"
+    }
+  },
+  "login": {
+    "title": "Connexion",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "no_account": "Vous n'avez pas encore de compte ?",
+    "register_link": "Créer un compte",
+    "or": "ou",
+    "continue_with_google": "Continuer avec Google",
+    "continue_with_facebook": "Continuer avec Facebook",
+    "fill_all_fields": "Veuillez remplir tous les champs.",
+    "invalid_credentials": "Email ou mot de passe invalide",
+    "invalid_server_response": "Réponse invalide du serveur.",
+    "unknown_error": "Une erreur est survenue.",
+    "google_auth_placeholder": "Connexion avec Google (à implémenter)",
+    "facebook_auth_placeholder": "Connexion avec Facebook (à implémenter)"
+  }
+}

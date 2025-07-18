@@ -1,0 +1,15 @@
+/* Thème clair (par défaut) */
+:root {
+    --color-primary: #007bff;
+    --color-secondary: #6c757d;
+    --color-background: #ffffff;
+    --color-text-primary: #212529;
+}
+
+/* Thème sombre */
+[data-theme="dark"] {
+    --color-primary: #375a7f;
+    --color-secondary: #444;
+    --color-background: #222;
+    --color-text-primary: #ddd;
+}

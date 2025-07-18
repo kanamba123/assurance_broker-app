@@ -1,0 +1,60 @@
+/* SubMenu Styles */
+
+.nav-item {
+    color: #adb5bd;
+}
+
+.nav-item.open .accordion-header {
+    background-color: #313b4c;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.nav-item .accordion-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background-color: #343a40;
+    color: #adb5bd;
+    cursor: pointer;
+}
+
+.nav-item .accordion-header:hover {
+    background-color: #495057;
+    color: #fff;
+}
+
+.nav-item .accordion-header .float-right {
+    margin-left: auto;
+}
+
+.nav-item .accordion-body {
+    background-color: #313b4c;
+    padding: 0;
+}
+
+.nav-item .accordion-body .nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+}
+
+.nav-item .accordion-body .nav-link {
+    padding: 0.5rem 1.25rem;
+    color: #adb5bd;
+    transition: background-color 0.2s;
+}
+
+.nav-item .accordion-body .nav-link:hover {
+    background-color: #495057;
+    color: #fff;
+}
+
+.nav-item .accordion-body .nav-link.active {
+    background-color: #495057;
+    color: #fff;
+}
+
+.nav-item .accordion-body .nav-link.pl-5 {
+    padding-left: 2.5rem !important;
+}

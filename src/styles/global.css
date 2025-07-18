@@ -1,0 +1,134 @@
+/* ===========================
+   🎨 Variables Globales CSS
+   =========================== */
+
+/* 🎨 Thème clair (par défaut) */
+@theme {
+  /* --- Couleurs principales --- */
+  --color-primary: #3b58b8;
+  --color-primary-light: #e6f0fb;
+  --color-primary-dark: #004999;
+
+  --color-secondary: #4cc2b1;
+  --color-secondary-light: #ced4da;
+  --color-secondary-dark: #495057;
+
+  /* --- Couleurs d'état --- */
+  --color-success: #1f9e61;
+  --color-warning: #ffb300;
+  --color-danger: #e55353;
+  --color-info: #339af0;
+
+  /* --- Couleurs d'action --- */
+  --color-action-add: #016dd2;
+  --color-action-edit: #339af0;
+  --color-action-delete: #e55353;
+  --color-action-restore: #6c757d;
+  --color-action-save: #3caea3;
+
+  /* --- Hover states --- */
+  --color-action-add-hover: #005bb5;
+  --color-action-edit-hover: #1c7ed6;
+  --color-action-delete-hover: #c0392b;
+  --color-action-restore-hover: #5a6268;
+  --color-action-save-hover: #2b9e92;
+
+  /* --- Fond --- */
+  --color-bg-primary: #ffffff;
+  --color-bg-dark-m: #16242b;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-alt: #eef4fb;
+  --color-bg-dark: #1e1e1e;
+  --color-surface: #f1f7fd;
+
+  /* --- Texte --- */
+  --color-text-primary: #1f2843;
+  --color-text-secondary: #6c757d;
+  --color-text-light: #f8f9fa;
+  --color-text-dark: #343a40;
+
+  /* --- Bordures & ombres --- */
+  --color-border: #d0e1f7;
+  --color-border-strong: #90b8e8;
+  --color-shadow-light: rgba(1, 109, 210, 0.08);
+  --color-shadow-strong: rgba(1, 109, 210, 0.15);
+  --color-shadow-highlight: #016dd240;
+
+  /* --- Bordures arrondies --- */
+  --border-radius-xs: 2px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  /* --- Typographie --- */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-family-sans: "Helvetica Neue", Arial, sans-serif;
+  --font-family-serif: "Georgia", serif;
+
+  /* --- Hauteur de ligne --- */
+  --line-height-xs: 1.2;
+  --line-height-sm: 1.4;
+  --line-height-md: 1.6;
+  --line-height-lg: 1.8;
+
+  /* --- Tableaux --- */
+  --color-table-row-odd: #f2f7fd;
+  --color-table-row-even: #ffffff;
+  --color-hover: #dceeff;
+}
+
+/* ===========================
+   🌙 Mode Sombre (Dark Mode)
+   =========================== */
+
+[data-theme="dark"] {
+  --color-primary: #339af0;
+  --color-primary-light: #4dabf7;
+  --color-primary-dark: #1c7ed6;
+
+  --color-secondary: #d6336c;
+  --color-secondary-light: #7c8ca1;
+  --color-secondary-dark: #343a40;
+
+  --color-success: #2bce85;
+  --color-warning: #f0c75e;
+  --color-danger: #e57373;
+  --color-info: #66d9ef;
+
+  --color-action-add: #339af0;
+  --color-action-edit: #4dabf7;
+  --color-action-delete: #e57373;
+  --color-action-restore: #adb5bd;
+  --color-action-save: #51d4c5;
+
+  --color-action-add-hover: #1c7ed6;
+  --color-action-edit-hover: #228be6;
+  --color-action-delete-hover: #c0392b;
+  --color-action-restore-hover: #868e96;
+  --color-action-save-hover: #38bfb2;
+
+  --color-bg-primary: #121212;
+  --color-bg-secondary: #1c1c1c;
+  --color-bg-alt: #1e1e1e;
+  --color-bg-dark: #1f3846;
+  --color-surface: #1a1a1a;
+
+  --color-text-primary: #e1eaf4;
+  --color-text-secondary: #adb5bd;
+  --color-text-light: #f1f1f1;
+  --color-text-dark: #dee2e6;
+
+  --color-border: #2d3c4f;
+  --color-border-strong: #4f5b75;
+  --color-shadow-light: rgba(1, 109, 210, 0.1);
+  --color-shadow-strong: rgba(1, 109, 210, 0.2);
+  --color-shadow-highlight: rgba(51, 154, 240, 0.25);
+
+  --color-table-row-odd: #1a2433;
+  --color-table-row-even: #121212;
+  --color-hover: #2c3c52;
+}

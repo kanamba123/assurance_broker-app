@@ -1,0 +1,20 @@
+/* Assurez-vous que le modal apparaît au-dessus des autres éléments */
+.custom-modal .modal-dialog {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    height: 100%; /* Utilise la hauteur totale de la fenêtre */
+    z-index: 1050; /* Assure que le modal apparaît au-dessus du nav-menu */
+}
+
+/* Style pour le modal */
+.custom-modal .modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour le modal */
+}
+
+/* Assurez-vous que le contenu principal n'est pas couvert par le modal */
+.main-conten_form {
+    position: relative;
+    z-index: 1000; /* Assure que le formulaire est derrière le modal */
+}

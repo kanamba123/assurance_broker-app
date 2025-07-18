@@ -1,0 +1,68 @@
+/* src/components/NavMenuWebSite/Header/Logo.css */
+
+/* Conteneur principal du logo */
+.logo-container {
+    display: flex;
+    align-items: center; /* Aligne verticalement l'image et le texte */
+  }
+  
+  /* Lien contenant le logo */
+  .logo-link {
+    display: flex;
+    align-items: center; /* Centre verticalement le contenu */
+    text-decoration: none; /* Supprime le soulignement du lien */
+    color: #333; /* Couleur du texte */
+    gap: 10px; /* Ajoute un espace entre le logo et le texte */
+    font-family: "Arial", sans-serif; /* Police professionnelle */
+    transition: color 0.3s ease; /* Transition de couleur du texte */
+    position: relative; /* Nécessaire pour l'effet survol */
+  }
+  
+  .logo-link:hover {
+    color: #007bff; /* Change la couleur du texte au survol */
+  }
+  
+  /* Animation moderne pour le logo */
+  .logo {
+    height: 40px; /* Ajuste la taille de l'image */
+    width: auto; /* Conserve les proportions */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Ajoute un effet de zoom et de flou au survol */
+  }
+  
+  .logo-link:hover .logo {
+    transform: scale(1.2); /* Agrandit légèrement le logo */
+    filter: brightness(1.2); /* Augmente la luminosité */
+  }
+  
+  /* Animation moderne pour le texte */
+  .logo-text {
+    font-size: 10px; /* Taille du texte */
+    font-weight: bold; /* Met en gras */
+    color: rgb(49, 237, 137);
+    position: relative; /* Permet d'ajouter des effets spécifiques */
+    transition: transform 0.3s ease, color 0.3s ease; /* Ajoute une animation au texte */
+  }
+  
+  .logo-link:hover .logo-text {
+    transform: translateX(5px); /* Déplace légèrement le texte vers la droite */
+    color: #007bff; /* Change la couleur du texte */
+  }
+  
+  /* Effet spécial pour le texte (soulignement animé) */
+  .logo-text::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #007bff;
+    transition: width 0.3s ease;
+  }
+  
+  .logo-link:hover .logo-text::after {
+    width: 100%; /* Barre de soulignement apparaît en douceur */
+
+  }
+  
+  

@@ -1,0 +1,61 @@
+/* Styles généraux pour la sidebar */
+
+.sidebar {
+    width: 250px;
+    transition: all 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #343a40;
+    color: white;
+    padding-top: 60px; /* Pour compenser la hauteur du NavBar */
+    overflow-y: auto;
+}
+
+.sidebar.is-open {
+    left: 0;
+}
+
+/* Styles pour l'en-tête de la sidebar */
+.sidebar-header {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.sidebar-title {
+    margin-bottom: 20px;
+}
+
+/* Styles pour les éléments de navigation */
+.sidebar-heading {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    margin: 10px 0;
+    padding-left: 15px;
+}
+
+.sidebar-link {
+    color: white;
+    padding: 10px 25px;
+    transition: background-color 0.3s;
+}
+
+.sidebar-link:hover {
+    background-color: #2366aa;
+}
+
+.sidebar-link .fa-icon {
+    margin-right: 10px;
+}
+
+/* Ajustement pour les icônes FontAwesome */
+.sidebar-link .fa-icon {
+    margin-right: 10px;
+}
+
+/* Ajouter cette classe pour l'arrière-plan de la partie principale */
+.main-content {
+    background-color: #f0f3f4; /* Couleur de fond gris-vert */
+    padding: 20px; /* Espace intérieur pour le contenu */
+}
