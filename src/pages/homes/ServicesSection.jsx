@@ -55,19 +55,16 @@ const ServicesSection = () => {
                                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                                     {service.name}
                                 </h3>
-                                <p className="text-sm text-gray-600 mb-3">
+                                <p className="text-sm text-gray-600">
                                     {service.description}
                                 </p>
 
-                                <div className="mt-auto text-sm text-gray-700 space-y-1">
+                                <div className="text-sm text-gray-700 space-y-1">
                                     <p>
                                         <strong>💰 Prix :</strong> {parseFloat(service.base_price).toLocaleString()} FBU
                                     </p>
-                                    <p>
-                                        <strong>🎯 Commission :</strong> {parseFloat(service.commission_rate)}%
-                                    </p>
                                     {service.terms_conditions && (
-                                        <p className="text-xs text-gray-500 mt-2 italic">
+                                        <p className="text-xs text-gray-500 italic">
                                             ⚖️ {service.terms_conditions}
                                         </p>
                                     )}
