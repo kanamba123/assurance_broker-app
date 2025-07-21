@@ -6,7 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PageTransition from "./components/PageTransition";
 
 // 📦 Lazy importation des pages
-const Home = lazy(() => import("./pages/Home"));
+const Home = lazy(() => import("./pages/homes/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const About = lazy(() => import("./pages/About"));
@@ -52,6 +52,9 @@ const ClientDetailByCategoryAndOthers = lazy(() => import("./pages/ClientDetailB
 
 //Publication
 const AdminPagePublications = lazy(() => import("./pages/admin/PublicationsList"));
+
+//ComponyProduct
+const AdminCamponyProducts = lazy(() => import("./pages/admin/CamponyProducts"));
 
 //Temoignages
 const AdminPageTemoignage = lazy(() => import("./pages/admin/TemoignageList"));
@@ -249,6 +252,10 @@ export const router = createBrowserRouter([
           {
             path: "publications",
             element: withPageTransition(AdminPagePublications),
+          },
+          {
+            path: "camponyProducts",
+            element: withPageTransition(AdminCamponyProducts),
           },
              {
             path: "messagecontact",

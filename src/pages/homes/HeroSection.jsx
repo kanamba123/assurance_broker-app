@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [nodes, setNodes] = useState([]);
-  const [connections, setConnections] = useState([]);
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
+  const {t}=useTranslation();
 
   // Mouse tracking with smooth spring animation
   const mouseX = useMotionValue(0);
@@ -322,7 +323,7 @@ const HeroSection = () => {
             filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))'
           }}
         >
-          Experience the power of interactive spider web animations and cutting-edge web technology
+          Des solutions d’assurance innovantes et personnalisées pour particuliers et entreprises.
         </motion.p>
         
         <motion.div 
@@ -348,7 +349,7 @@ const HeroSection = () => {
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
             />
-            <span className="relative z-10">Get Started</span>
+            <span className="relative z-10">{t('home.hero.button1')}</span>
             <motion.div
               className="relative z-10"
               animate={{ x: [0, 5, 0] }}
@@ -375,7 +376,7 @@ const HeroSection = () => {
               whileHover={{ opacity: 0.1 }}
               transition={{ duration: 0.3 }}
             />
-            <span className="relative z-10">Learn More</span>
+            <span className="relative z-10">{t('home.hero.button2')}</span>
           </motion.button>
         </motion.div>
       </motion.div>

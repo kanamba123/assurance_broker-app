@@ -12,7 +12,6 @@ const fetchTestimonies = async () => {
 const fetchTestimoniesPaginated = async ({ pageParam = 1 }) => {
   const limit = 5;
   const response = await api.get(`/temoignage/client?page=${pageParam}&limit=${limit}`);
-  console.log("📦 Fetched page:", pageParam, "→", response.data);
   return response.data;
 };
 
@@ -66,7 +65,6 @@ export const useTestimonInfinite = () => {
     queryKey: ['testimonies'],
     queryFn: fetchTestimoniesPaginated,
     getNextPageParam: (lastPage, pages) => {
-      // Suppose lastPage has a hasMore boolean and currentPage value
       return lastPage.hasMore ? lastPage.currentPage + 1 : undefined;
     },
   });

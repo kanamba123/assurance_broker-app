@@ -82,7 +82,7 @@ const UserList = () => {
 
   const getStatusBadge = (status) => {
     switch (status) {
-      case 'actif':
+      case 'activé':
         return <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Actif</span>;
       case 'inactif':
         return <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Inactif</span>;
@@ -135,7 +135,7 @@ const UserList = () => {
                         <div className="flex items-center">
                           <div className="ml-4">
                             <div className="text-sm font-medium ">
-                              {user.name}
+                              {user.first_name} {user.last_name}
                             </div>
                           </div>
                         </div>
@@ -147,7 +147,7 @@ const UserList = () => {
                         {getRoleBadge(user.role)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {getStatusBadge(user.statut)}
+                        {getStatusBadge(user.status)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm ">
                         {new Date(user.created_at).toLocaleDateString()}
@@ -183,7 +183,7 @@ const UserList = () => {
       {/* Modal pour ajouter/modifier un utilisateur */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg w-full max-w-md p-6 relative">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
             <button
               className="absolute top-4 right-4 text-gray-600 dark:text-gray-300 hover:text-red-500"
               onClick={() => {
@@ -204,7 +204,7 @@ const UserList = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500  dark:border-gray-700"
                     required
                   />
                 </div>
@@ -215,7 +215,7 @@ const UserList = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500  dark:border-gray-700"
                   required
                 />
               </div>
@@ -226,7 +226,7 @@ const UserList = () => {
                     name="role"
                     value={formData.role}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500  dark:border-gray-700"
                     required
                   >
                     <option value="user">Utilisateur</option>
@@ -240,7 +240,7 @@ const UserList = () => {
                     name="statut"
                     value={formData.statut}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500  dark:border-gray-700"
                     required
                   >
                     <option value="actif">Actif</option>
@@ -255,7 +255,7 @@ const UserList = () => {
                     type="password"
                     name="password"
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500  dark:border-gray-700"
                     required={!editingUser}
                   />
                 </div>

@@ -107,7 +107,7 @@
     "errorDetails": "Une erreur est survenue lors du chargement de la publication.",
     "noImage": "Aucune image disponible",
     "noDescription": "Aucune description fournie.",
-    "other_pub":"Autres publication"
+    "other_pub": "Autres publication"
   },
   "clients": {
     "title": "Liste des clients",
@@ -163,7 +163,9 @@
       "title": "GISA ANALYTICA Inc.",
       "subtitle": "Cabinet de conseil stratégique. Plateforme biface. Expertise systémique.",
       "description": "Alliance de la recherche et de la pratique au service de vos décisions.",
-      "button": "Nos services"
+      "button": "Nos services",
+      "button1": "Demander un avis",
+      "button2": "Contact-nous"
     },
     "section1": {
       "text": "GISA ANALYTICA Inc. mobilise un réseau international de chercheurs, d'experts sectoriels et de praticiens chevronnés pour accompagner les gouvernements, les institutions, les ONG, les entreprises stratégiques et les membres de la diaspora dans la conception, la planification et la mise en œuvre de projets à fort impact.",
@@ -183,8 +185,8 @@
     "home": "Accueil",
     "about": "À propos de nous",
     "ourProducts": "Nos produits",
-    "location":"Location",
-    "comparator":"Comparateur",
+    "location": "Location",
+    "comparator": "Comparateur",
     "services": "Services",
     "clients": "Clients",
     "experts": "Experts",

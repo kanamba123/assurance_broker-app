@@ -51,7 +51,9 @@ const Testimony = () => {
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  const testimonies = data?.pages.flatMap(page => page.items) || [];
+  const testimonies = data?.pages?.flatMap(page => page.items ?? []) || [];
+
+  
 
 
 

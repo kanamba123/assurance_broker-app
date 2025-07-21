@@ -94,6 +94,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       roles: ['admin'],
       subItems: [
         { name: 'Service', path: '/admin/dashboard/service' },
+        { name: 'Products ', path: '/admin/dashboard/camponyProducts' },
         { name: 'Publications', path: '/admin/dashboard/publications' },
         { name: 'Temoignages', path: '/admin/dashboard/temoignage' },
         { name: 'Biens', path: '/admin/dashboard/bien' },
