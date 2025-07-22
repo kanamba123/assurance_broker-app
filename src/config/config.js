@@ -4,7 +4,7 @@
 // };
 
 const config = {
-  API_BASE_URL: "http://localhost/assurbrokers-api",
+  API_BASE_URL: "http://192.168.245.42/assurbrokers-api",
 };
 
 export default config;

@@ -53,6 +53,7 @@ const ClientDetailByCategoryAndOthers = lazy(() => import("./pages/ClientDetailB
 //Publication
 const AdminPagePublications = lazy(() => import("./pages/admin/PublicationsList"));
 
+
 //ComponyProduct
 const AdminCamponyProducts = lazy(() => import("./pages/admin/CamponyProducts"));
 
@@ -146,7 +147,11 @@ export const router = createBrowserRouter([
       {
         path: "/publications/detail/:publicationTitre/:publicationId",
         element: withPageTransition(DetailPublications),
-      }
+      },
+      {
+        path :"/our_products",
+        element :withPageTransition(lazy(() => import("./pages/NosProduits")))
+      },
       ,
       {
         path: "/testimony",

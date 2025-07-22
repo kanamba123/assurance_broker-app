@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { href, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
-import { useClientsCategoris } from "../../hooks/api/useCientCategories";
-import { ChevronDownIcon, UserIcon, Languages, ShieldCloseIcon, Locate, LocateIcon } from "lucide-react";
-import { useCategoriesByCondition } from "../../hooks/api/useCategoriesService";
+import { UserIcon, Languages, ShieldCloseIcon, Locate, LocateIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LANGUAGES } from "../../constants";
 
@@ -11,8 +9,6 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const { data: clients = [] } = useClientsCategoris();
-  const { data: categoriesbyservices = [] } = useCategoriesByCondition("service");
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const timeoutRef = useRef(null);
@@ -20,6 +16,13 @@ const Navbar = () => {
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [showLangPopup, setShowLangPopup] = useState(false);
   const langPopupRef = useRef(null);
+  const [showBottomBar, setShowBottomBar] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState(null);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [showFixedNav, setShowFixedNav] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+  const navbarRef = useRef(null);
+  const [navbarOffsetTop, setNavbarOffsetTop] = useState(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,14 +38,45 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [mobileMenuOpen, showLangPopup]);
 
-  function slugify(text) {
-    return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-  }
+
+  useEffect(() => {
+    if (!navbarRef.current) return;
+    setNavbarOffsetTop(navbarRef.current.offsetTop);
+  }, [navbarRef]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarOffsetTop === null) return;
+
+      if (window.pageYOffset >= navbarOffsetTop) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [navbarOffsetTop]);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setScrollDirection("down");
+        setShowFixedNav(true);
+      } else if (currentScrollY < lastScrollY) {
+        setScrollDirection("up");
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+
 
   const navItems = [
     {
@@ -58,35 +92,45 @@ const Navbar = () => {
       href: "/our_products",
     },
     {
-      label: t("navbar.publications"),
-      href: "/publications",
-    },
-    {
       label: t("navbar.contact"),
       href: "/contact",
+    },
+    {
+      label: "Assurance en ligne",
+      href: "/location",
     },
     {
       label: t("navbar.language"),
       lang: true,
     },
-    {
-      label: t("navbar.location"),
-      href: "/location",
+  ];
+
+
+  const navItems2 = [
+    {label :t('navbar.login'),
+      href :"/login"
     },
-    user
-      ? {
-        label: ` ${user?.name}` || t("navbar.account"),
-        isUserMenu: true,
-      }
-      : {
-        label: t("navbar.login"),
-        isAuth: true,
-      },
-      {
-      label: t("navbar.comparator"),
-      href: "/location",
+    {
+      label: "E-Partener",
+      href: "epartener",
+    },
+    {
+      label: "Nous contactez",
+      href: "/contact",
     },
   ];
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setShowBottomBar(scrollY > 50); 
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   const handleMouseEnter = (label) => {
     clearTimeout(timeoutRef.current);
@@ -331,114 +375,170 @@ const Navbar = () => {
     </div>
   );
 
-  return (
-    <div className="w-full sticky top-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-3">
-          {/* Logo */}
-          <div className="flex items-center">
-            <button
-              className="md:hidden text-gray-600 focus:outline-none mr-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-            <a href="/" className="flex items-center">
-              <img
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABC1BMVEUAAAD////m6e3/6qdp1vT813CpqanswZz/7anu8fXM0dlt3v3/8ayajWX/9K7/76q3qHjSwYo3MyT346JwZkkQISbYx44RERF5b0+Cd1XDxsm8oFRJSkuwsLDZ3OCYgkRjyufS0tI+P0BcXV9TVFW4ur18foDf4uU/gZNUq8MuXmtewNscOkImTViLjY+OdV45dIRXsMnftpNFOS4kJCWAaFTFoYKIdD1w5P8jIBfJzM9sbGz/4nYyMjMcHBwJExWGhoZRRiR6aTbRsl2pkEv20m5mVy1TTDaPg14tLS3EtIBgWD9zdnubm5sVLDIiRk+miG5rWEdQQjWJcFtNnLIxKCD7zabku5c0a3nDuCgJAAAHCUlEQVR4nO3de1vaSBQG8AgKpCBWpcXNaio3sa7FS9W1QdC9dLdW3AVb6X7/T7LIzCSZcAjkcWYyxPP+Z+Zg8mMSSCYhMZaSHiPuBZAeFMqJtZMRm0Zq6rxiEFbahoR0dqbMTr3wRoZvbGyC81MurMsCjlKBZqhaWJMINAyoFxULM1KBRjV+YVmu0GjELdxhS/LbO6H5nf3fTtxCthX+cbUiNFcrf9H/bMYspIvxp2DgKJ/pv7b0EH4WDlxhnTi5IcYiFN+FKyu/ohCFKEQhClGIwuQLr/QS/iwhOuy1WVJGoIKp3gcOL5QJM7IPfr20ucEMRUKno8z3lJZy4b1S3yhVb1VVItxTDTSMsrumqhDGADSMLutFBUL/COJG6SeJ2frbNys2sihf2HTnWV7dzK0VZCaX/nrnzq6lSrjN5vglPVoC2ckV1z+xGdpqhBab3+uidN44a5sbdI5tNcKaYuCoGzdZLzZVCNlWuFVQBRz14rp/S5QtZB+km/I3QS/FEpnprQoh3dsuKVtHn5JjnWgqEN6SWX1V2YWjTqRCR4EwjpU0nS7Qb8UddUK1wHThC5ltRp1Q6WY4Eq6iUJYwF5K0wJI5hM2KoHDC3HpI6NK/DSnZnLdkDqEhOERYCCshy1b8FFLydtxFhbuQktdr8wmFjzrML9wIKaHCUkjJvELh42K6CcUPHOkmPItOmBHNhBLG/jQT0q2wWxcQUFjjAgrrXMkZJNzmSjoRhOyQrmW/em7sV6DQ9Ie9obzQ5mrqkNDiSm4iCOlidJ/tewosTPliwkKuBBQ2/P/G3JtfyLbCVmKFXZFdqKPQ3QoTK6RdeCsGqJ2w2WRbYa8hJloJK206bCQhOgib7vmFhArdK7CTKpQMjF/IBhuSK5R+pUR0oSlU6K2j1W3BAYW244sNCq2Kv2QbEma4knaosErn3HZSpuCAQjAyjw/ZYrS5tUdM9BCyHQ/xPl2EdGdbRhfqJWwlV0g/SuvJFTq01Z69wGKEVS6gkC8pQ8IOV3IWJmQjMzVVn6VLEUeilp49EsUG9DLiiaBQ/V6bu1sqfj3VRMiuCZHwYaOL0L1+UPh6qovQuwZU9HqqjdC91UG9aQuNPkL2ZkuKBkLJdzvQQSj3jhVaCKWup1oIpf7sQw+hzBFFrYTXb6DMbjPC2nhhqulLChQ6XAks5EoiCPcv8xO5PCFtB0Bbfpe0HUJteVAIRsGVCkyYX57MeyqE2n6hQqhtGYUoRCEKYxKWuYBCsIQXgiWaCNWPRKkWxrxPg0IUohCFKEQhClGIwoUQQuMtYsdpzIh73qJ+jaBuNBGMuuNDKUGhgcJxUGigMPqCzx2thMn/PnwB+zQoRCEKUYhCFKIQhShE4VOSfw44+efxwSTqWgwUohCFL/760uRfIywlWu3ToBCFKEShfOHxLpDvpO1gGWij35WHUNuujkJonyaPR8AoRCEKF02Y/JEo9fc2US0Eg8f4KEQhClEYSaj+vok67tOIvfeljsLF3mtDIQqfK1RwfalqYYM8LoPu5P/zAcghaXsDtf1L2q6htg96COXeIgqFKEQhCuMRqv41AhX2HEt8QKHy5z3Juxe0qcmdkpN/t2sUohCFkYRSnkOqTBjbs2SVCWN7HrA6oaqgEIWJEtId91mO6WW8sCA9uUhCM+Xc77Xbvb2MkwpBmrbV6o3KWg17EskJC6UtySmt5+YXmvaN9yiv6n1zitG0al23rLYTrOKFhvTM/41vssuK3dxDRLMSeKhgx+LL6GT9hKbVnXhx1Z4wmsA9wG8WQmiCV2J2nSCxB5XVFkBoNuCXl3miCQL5J53QSboJnWmvP2vOWEVJeqbuwqr7gsfzfr8/8I5o/E8u870PD9/6/aMH72/vI5VO4IXvodCfZnwHG0noGZJ9qO0ggtDrm8eL7DCbzQ5/9NnP+wzL60L3fRhcPFVlh6fnbMpteB9C5+EuqXAXPEk3Tp4qTqBrfI+j9CHjDLJuTh/ptG23d9xtte9WDS/YNPeJPHML80w4Fbicp2eyTqC2CEKTDRD7gKOwNdVhXcieTNMf+qoYsau1kH6Hlzmgu+w3dNnZM3IGfmB2+C3wRmgpZH3DC7MDMpmupu4XymmgjE5me0A6CtlAfGDJWSd2yTkTdp5gECyjnzY1fYVsd+ZjcNFP6X4cWf9MerrhKFjWJ9M7GgszUzon+xESXky8EWT6mf7C82Fg0Ye8sL74wuCiDxPXhyhEIQpRiEIUojChwnFm7bVVSBkTBsqGP5iQnMlgwvFJhSL9C7rW1hvFmJpLdxQDCBOO51SEhfXWOPSHCw9HwdCBjD1SRkf8z4NV9BC4TKpa1LRKQv/ah3JN2o7BRhJ6He9/UBsdpSqRGd2BwgQGhYsfFC5+Xo6wkklqKvxvZhIaFC5+/geGYozKDKVB5gAAAABJRU5ErkJggg=="
-                alt="Logo"
-                width={40}
-                height={40}
-                className="object-contain bg-white rounded"
-              />
-              <span className="ml-2 text-lg font-bold text-primary hidden sm:inline">ASSURANCE BROKER</span>
-            </a>
-          </div>
 
-          {/* Navigation desktop */}
-          <ul className="hidden md:flex space-x-6">
-            {navItems.map((item) => (
-              <li
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => item.submenu && handleMouseEnter(item.label)}
-                onMouseLeave={() => item.submenu && handleMouseLeave()}
-              >
-                {item.isAuth ? (
-                  <button
-                    onClick={() => setShowAuthPopup(true)}
-                    className="flex items-center hover:text-secondary text-sm lg:text-base"
-                  >
-                    <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                    {item.label}
-                  </button>
-                ) : item.isUserMenu ? (
-                  <button
-                    onClick={() => handleMouseEnter(item.label)}
-                    className="flex items-center hover:text-primary text-sm lg:text-base"
-                  >
-                    <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                    <span>{item.label}</span>
-                  </button>
-                ) : item.lang ? (
-                  <div className="relative">
+  return (
+    <div className="w-full relative  z-50 bg-white shadow-sm">
+
+      <div className="block ">
+        <div className="bg-primary  px-4 sm:px-6 lg:px-8">
+          <div className="flex">
+            {showFixedNav && (
+              <div className="z-40 transition-opacity duration-300 w-full ">
+                <div className="mx-auto flex justify-between items-center px-4 text-sm">
+
+                  {/* 📞 Gauche : numéro */}
+                  <p className="text-white text-xl hidden sm:block">
+                    📞 01 23 45 67 89
+                  </p>
+
+                  {/* Droite : navItems2 + bouton */}
+                  <div className="flex items-center space-x-4">
+
+                    {/* navItems2 */}
+                    <div className="text-white hidden sm:flex items-center space-x-4">
+                      {navItems2.map((item) => (
+
+                        <NavLink key={item.href} to={item.href}>
+                          {item.label}
+                        </NavLink>
+
+                      ))}
+
+                    </div>
+
+                    {/* Bouton */}
                     <button
-                      onClick={() => setShowLangPopup(!showLangPopup)}
-                      className="flex items-center hover:text-primary text-sm lg:text-base"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2"
                     >
-                      <Languages className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                      <span>{item.label}</span>
+                      Comparer vos assurances
                     </button>
-                    <LangPopup />
+
                   </div>
-                ) :  item.location ? (
-                  <div className="relative">
-                    <button
-                      onClick={() => setShowLangPopup(!showLangPopup)}
-                      className="flex items-center hover:text-primary text-sm lg:text-base"
-                    >
-                      <LocateIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                      <span>{item.label}</span>
-                    </button>
-                  </div>
-                ) : (
-                  <NavLink
-                    to={item.href}
-                    className={({ isActive }) =>
-                      `hover:text-primary text-sm lg:text-base ${isActive ? "text-primary font-medium" : "text-gray-700"}`
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                )}
-              </li>
-            ))}
-          </ul>
+                </div>
+              </div>
+            )}
+
+          </div>
         </div>
 
-        {/* Dropdown desktop */}
-        {openDropdown && (
-          <div
-            className="absolute left-0 w-full bg-white shadow-lg z-40 border-t border-gray-100"
-            onMouseEnter={() => clearTimeout(timeoutRef.current)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-              {renderDropdownContent()}
-            </div>
-          </div>
-        )}
 
+        <div
+          ref={navbarRef}
+          className={`px-4 sm:px-6 lg:px-8 ${isFixed
+            ? "relative top-0 left-0 right-0 z-50 bg-white shadow-md"
+            : "relative left-0 right-0 z-50 bg-white shadow-md"
+            }`}
+        >
+          <div className="max-w-7xl mx-auto flex justify-between items-center py-3">
+            {/* Logo */}
+            <div className="flex items-center">
+              <button
+                className="md:hidden text-gray-600 focus:outline-none mr-2"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+              <a href="/" className="flex items-center ">
+                <img
+                  src="https://bestassurbrokers.com/public/assets/img/logo.png"
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                  className="object-contain bg-white rounded hidden sm:flex"
+                />
+                <span className="ml-2 text-lg font-bold text-primary">ASSURANCE BROKER</span>
+              </a>
+
+            </div>
+
+            {/* Navigation desktop */}
+            <ul className="hidden md:flex space-x-6">
+              {navItems.map((item) => (
+                <li
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => item.submenu && handleMouseEnter(item.label)}
+                  onMouseLeave={() => item.submenu && handleMouseLeave()}
+                >
+                  {item.isAuth ? (
+                    <button
+                      onClick={() => setShowAuthPopup(true)}
+                      className="flex items-center hover:text-secondary text-sm lg:text-base"
+                    >
+                      <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                      {item.label}
+                    </button>
+                  ) : item.isUserMenu ? (
+                    <button
+                      onClick={() => handleMouseEnter(item.label)}
+                      className="flex items-center hover:text-primary text-sm lg:text-base"
+                    >
+                      <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                      <span>{item.label}</span>
+                    </button>
+                  ) : item.lang ? (
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowLangPopup(!showLangPopup)}
+                        className="flex items-center hover:text-primary text-sm lg:text-base"
+                      >
+                        <Languages className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                        <span>{item.label}</span>
+                      </button>
+                      <LangPopup />
+                    </div>
+                  ) : item.location ? (
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowLangPopup(!showLangPopup)}
+                        className="flex items-center hover:text-primary text-sm lg:text-base"
+                      >
+                        <LocateIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                        <span>{item.label}</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <NavLink
+                      to={item.href}
+                      className={({ isActive }) =>
+                        `hover:text-primary text-sm lg:text-base ${isActive ? "text-primary font-medium" : "text-gray-700"}`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  )}
+                </li>
+              ))}
+
+            </ul>
+          </div>
+
+          {/* Dropdown desktop */}
+          {openDropdown && (
+            <div
+              className="absolute left-0 w-full bg-white shadow-lg z-40 border-t border-gray-100"
+              onMouseEnter={() => clearTimeout(timeoutRef.current)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                {renderDropdownContent()}
+              </div>
+            </div>
+          )}
+
+        </div>
       </div>
+
 
       {/* Menu mobile */}
       <div
@@ -452,7 +552,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between px-4 py-3 border-b">
             <a href="/" className="flex items-center">
               <img
-                src="https://static.wixstatic.com/media/591562_e80aea7a733d400da8350fbfb583107b~mv2.png/v1/fill/w_96,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/591562_e80aea7a733d400da8350fbfb583107b~mv2.png"
+                src="https://bestassurbrokers.com/public/assets/img/logo.png"
                 alt="Logo"
                 width={30}
                 height={30}
@@ -567,6 +667,8 @@ const Navbar = () => {
                   </li>
                 );
               })}
+
+
             </ul>
           </nav>
         </div>

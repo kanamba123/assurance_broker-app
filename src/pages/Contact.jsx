@@ -133,10 +133,10 @@ const Contact = () => {
             <div className="flex items-center space-x-3">
               <FaEnvelope className="text-blue-500" />
               <a
-                href="mailto:info@gisaanalytica.com"
+                href="mailto:info@bestassurbrokers.com"
                 className="hover:underline text-blue-600 dark:text-blue-400"
               >
-                info@gisaanalytica.com
+                info@bestassurbrokers.com
               </a>
             </div>
 

@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
 import api from '../../api/api';
 
 // API
@@ -11,6 +11,13 @@ const fetchCompanyProductsByPagin = async () => {
   const response = await api.get('/company_products/client');
   return response.data;
 };
+
+const fetchCompanyProductsByInfinityPagin = async ({ pageParam = 1 }) => {
+  const limit = 6;
+  const response = await api.get(`/company_products_pag_inf/client?page=${pageParam}&limit=${limit}`);
+  return response.data;
+};
+
 
 const createCompanyProduct = async (product) => {
   const response = await api.post('/company_products', product);
@@ -51,6 +58,18 @@ export const useCompanyProductsByPagination = () => {
     queryKey: ['company_products1'],
     queryFn: fetchCompanyProductsByPagin,
     staleTime: 1000 * 60 * 5,
+  });
+};
+
+
+
+export const useCompanyProductsByInfinityPagination = () => {
+  return useInfiniteQuery({
+    queryKey: ['company_productsinf'],
+    queryFn: fetchCompanyProductsByInfinityPagin,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.hasMore ? lastPage.currentPage + 1 : undefined;
+    },
   });
 };
 

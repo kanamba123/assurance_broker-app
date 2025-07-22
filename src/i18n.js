@@ -3,15 +3,14 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpBackend from 'i18next-http-backend';
 
-// Récupérer la langue sauvegardée dans le localStorage
-const savedLanguage = localStorage.getItem('userLanguage');
+const savedLanguage = localStorage.getItem('i18nextLng');
 
 i18n
   .use(HttpBackend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: savedLanguage || 'fr', // Utiliser la langue sauvegardée ou 'fr' par défaut
+    lng: savedLanguage || 'fr',
     fallbackLng: 'en',
     debug: false,
     interpolation: {
@@ -21,9 +20,7 @@ i18n
       loadPath: '/locales/{{lng}}/translation.json',
     },
     detection: {
-      // Configuration spécifique pour le détecteur de langue
       order: ['localStorage', 'navigator'],
-      lookupLocalStorage: 'userLanguage', // Utiliser notre clé personnalisée
       caches: ['localStorage'],
     },
   });
