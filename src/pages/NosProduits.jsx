@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import { useCompanyProductsByInfinityPagination } from '../hooks/api/useCompanyProduct';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import QuoteBox from '../components/ui/QuoteBox';
 
 const formatImageUrl = (path) => {
     if (!path) return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxdAOY_-vITFVI-ej84s2U_ErxhOly-z3y_Q&s';
@@ -64,7 +65,7 @@ const NosProduits = () => {
     };
 
     return (
-        <section id="services" className=" bg-white">
+        <section id="services" className=" bg-gray-100">
 
             <section
                 id="contact"
@@ -103,7 +104,6 @@ const NosProduits = () => {
                 </div>
             </section>
 
-
             <section
                 id="contact"
                 className="relative  bg-cover bg-center bg-no-repeat "
@@ -119,7 +119,7 @@ const NosProduits = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
                     >
-                       
+
 
                         <motion.div
                             className="flex flex-col md:flex-row items-center   text-center md:text-left"
@@ -129,12 +129,12 @@ const NosProduits = () => {
                             viewport={{ once: true, amount: 0.3 }}
                         >
                             <motion.div>
-                                 <motion.h2
-                            className="text-3xl md:text-2xl font-bold mb-8"
-                            variants={fadeInUp}
-                        >
-                            Trouvez la meilleure assurance pour vous
-                        </motion.h2>
+                                <motion.h2
+                                    className="text-3xl md:text-2xl font-bold mb-8"
+                                    variants={fadeInUp}
+                                >
+                                    Trouvez la meilleure assurance pour vous
+                                </motion.h2>
                                 <motion.h2
                                     className="text-xl md:text-xl font-bold text-primary max-w-2xl"
                                     variants={fadeInUp}
@@ -161,58 +161,66 @@ const NosProduits = () => {
                 </div>
             </section>
 
-
-
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2
-                    data-aos="fade-up"
-                    className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800"
-                >
-                    {t('service.title', 'Nos Services')}
-                </h2>
+                <div className=' my-12'>
+                    <h2
+                        data-aos="fade-up"
+                        className="text-3xl md:text-3xl font-bold text-center text-gray-800"
+                    >
+                        {t('service.titl', 'Nos produits d\'Assurance')}
+                    </h2>
+                    <p>
+                        Découvrez nos offres d’assurance adaptées à vos besoins
+                    </p>
+                </div>
 
                 <div
-                    className=" gap-6 overflow-x-auto pb-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible"
+                    className="gap-6 overflow-x-auto pb-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible"
                 >
                     {companyProducts.map((service, index) => (
                         <div
                             key={service.id || index}
                             data-aos="fade-up"
-                            className="border border-gray-200 rounded-2xl overflow-hidden shadow-sm bg-white transition hover:shadow-md"
+                            className="border border-gray-300 rounded-sm overflow-hidden bg-white transition hover:shadow-md"
                         >
                             {/* Image */}
-                            <div className="w-full h-40 sm:h-48 md:h-52 lg:h-56 xl:h-60 bg-gray-50 flex items-center justify-center">
+                            <div className="w-full h-40 sm:h-48 md:h-52 lg:h-56 xl:h-60 flex items-center justify-center">
                                 <img
                                     src={formatImageUrl(service.logo_path)}
                                     alt={service.name}
-                                    className="object-contain max-h-full  p-3"
+                                    className="object-contain max-h-full "
                                 />
                             </div>
 
                             {/* Contenu texte */}
                             <div className="p-4 sm:p-5 space-y-2 text-gray-800">
-                                <h3 className="text-base sm:text-lg font-semibold">
+                                <h3 className="text-1xl sm:text-lg font-semibold items-center">
                                     {service.name}
                                 </h3>
-
-                                <p className="text-sm text-gray-600 leading-relaxed">
+                                <p className=" text-md  gap-1 leading-relaxed">
+                                    <strong>Prix :</strong> {parseFloat(service.base_price).toLocaleString()} FBU
+                                </p>
+                                <p className="text-base text-gray-600 leading-relaxed">
                                     {service.description}
                                 </p>
 
-                                <div className="text-sm text-gray-700 space-y-1">
-                                    <p>
-                                        <strong>💰 Prix :</strong> {parseFloat(service.base_price).toLocaleString()} FBU
-                                    </p>
+                                {/* <div className="text-sm text-gray-700 space-y-1">
+
                                     {service.terms_conditions && (
-                                        <p className="text-xs text-gray-500 italic">
-                                            ⚖️ {service.terms_conditions}
+                                        <p className="flex items-center gap-1 text-xs text-secondary italic">
+                                            {service.terms_conditions}
                                         </p>
                                     )}
+                                </div> */}
+
+                                <div>
+                                    <button className="bg-blue-500 hover:bg-blue-600 rounded-md px-2 py-1 text-white">
+                                        Voir plus
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     ))}
-
 
                     <div ref={loaderRef} className="h-4"></div>
 
@@ -221,6 +229,12 @@ const NosProduits = () => {
                     )}
                 </div>
             </div>
+
+
+            <section className="flex justify-center items-center min-h-auto my-6 bg-gray-50">
+                <QuoteBox />
+            </section>
+
         </section>
     );
 };

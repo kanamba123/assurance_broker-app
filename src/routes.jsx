@@ -149,8 +149,12 @@ export const router = createBrowserRouter([
         element: withPageTransition(DetailPublications),
       },
       {
-        path :"/our_products",
+        path :"/products/:entrepriseName/",
         element :withPageTransition(lazy(() => import("./pages/NosProduits")))
+      },
+        {
+        path :"/devis/",
+        element :withPageTransition(lazy(() => import("./pages/DevisForm")))
       },
       ,
       {

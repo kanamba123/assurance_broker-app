@@ -1,6 +1,7 @@
+
 import { motion } from "framer-motion";
 
-// Exemple de variants d'animation
+// Variants d'animation
 const staggerContainer = {
   hidden: {},
   visible: {
@@ -31,7 +32,7 @@ const scaleIn = {
 };
 
 const AboutSection = () => (
-  <section id="about" className="py-20 bg-gray-50">
+  <section id="about" className="py-20 bg-gray-50 overflow-x-hidden">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         variants={staggerContainer}
@@ -40,24 +41,24 @@ const AboutSection = () => (
         viewport={{ once: true, amount: 0.3 }}
       >
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800"
           variants={fadeInUp}
         >
           Who We Are at BestBrokers
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+          {/* Contenu Gauche */}
           <motion.div variants={fadeInLeft}>
             <motion.h3
-              className="text-2xl font-semibold mb-6 text-gray-800"
+              className="text-xl sm:text-2xl font-semibold mb-6 text-gray-800"
               variants={fadeInUp}
             >
               Expertise & Trust at Your Service
             </motion.h3>
 
             <motion.p
-              className="text-gray-600 mb-6 leading-relaxed"
+              className="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base"
               variants={fadeInUp}
               transition={{ delay: 0.2 }}
             >
@@ -65,7 +66,7 @@ const AboutSection = () => (
             </motion.p>
 
             <motion.p
-              className="text-gray-600 leading-relaxed mb-8"
+              className="text-gray-600 leading-relaxed mb-8 text-sm sm:text-base"
               variants={fadeInUp}
               transition={{ delay: 0.4 }}
             >
@@ -73,7 +74,7 @@ const AboutSection = () => (
             </motion.p>
 
             <motion.div
-              className="rounded-2xl overflow-hidden shadow-lg relative"
+              className="rounded-2xl overflow-hidden shadow-lg relative max-w-full"
               variants={scaleIn}
               whileHover={{ scale: 1.05, rotateY: 5 }}
               transition={{ duration: 0.4 }}
@@ -81,7 +82,7 @@ const AboutSection = () => (
               <motion.img
                 src="https://images.unsplash.com/photo-1588776814546-ec7e3588c9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                 alt="Insurance advisor team"
-                className="w-full h-48 object-cover"
+                className="w-full h-48 sm:h-64 object-cover"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.6 }}
               />
@@ -95,14 +96,16 @@ const AboutSection = () => (
                 whileHover={{ opacity: 1, x: 10 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="text-sm font-medium text-gray-800">Your Trusted Advisors</p>
+                <p className="text-sm font-medium text-gray-800">
+                  Your Trusted Advisors
+                </p>
               </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* Right Stats Card */}
+          {/* Statistiques à droite */}
           <motion.div
-            className="bg-white p-8 rounded-2xl shadow-lg"
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg"
             variants={fadeInRight}
             whileHover={{
               scale: 1.02,
@@ -136,7 +139,7 @@ const AboutSection = () => (
                   }}
                 >
                   <motion.div
-                    className="text-3xl font-bold text-purple-600 mb-2"
+                    className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2"
                     initial={{ scale: 0, rotate: -180 }}
                     whileInView={{ scale: 1, rotate: 0 }}
                     transition={{

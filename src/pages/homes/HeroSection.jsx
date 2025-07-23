@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import FlayerLogo from '../../components/ui/FlayerLogo';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [nodes, setNodes] = useState([]);
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const {t}=useTranslation();
+  const { t } = useTranslation();
 
   // Mouse tracking with smooth spring animation
   const mouseX = useMotionValue(0);
@@ -21,7 +22,7 @@ const HeroSection = () => {
     const initializeNodes = () => {
       const newNodes = [];
       const nodeCount = 50;
-      
+
       for (let i = 0; i < nodeCount; i++) {
         newNodes.push({
           id: i,
@@ -98,7 +99,7 @@ const HeroSection = () => {
       for (let j = i + 1; j < updatedNodes.length; j++) {
         const nodeA = updatedNodes[i];
         const nodeB = updatedNodes[j];
-        
+
         const distance = Math.sqrt(
           (nodeA.x - nodeB.x) ** 2 + (nodeA.y - nodeB.y) ** 2
         );
@@ -106,7 +107,7 @@ const HeroSection = () => {
         if (distance < maxDistance) {
           const opacity = (maxDistance - distance) / maxDistance;
           ctx.globalAlpha = opacity * 0.3;
-          
+
           ctx.beginPath();
           ctx.moveTo(nodeA.x, nodeA.y);
           ctx.lineTo(nodeB.x, nodeB.y);
@@ -127,7 +128,7 @@ const HeroSection = () => {
       if (distance < mouseRadius) {
         const opacity = (mouseRadius - distance) / mouseRadius;
         ctx.globalAlpha = opacity;
-        
+
         ctx.beginPath();
         ctx.moveTo(node.x, node.y);
         ctx.lineTo(mousePosition.x, mousePosition.y);
@@ -168,7 +169,7 @@ const HeroSection = () => {
     );
     gradient.addColorStop(0, 'rgba(236, 72, 153, 0.3)');
     gradient.addColorStop(1, 'rgba(236, 72, 153, 0)');
-    
+
     ctx.fillStyle = gradient;
     ctx.globalAlpha = 1;
     ctx.beginPath();
@@ -185,7 +186,7 @@ const HeroSection = () => {
         const rect = containerRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         setMousePosition({ x, y });
         mouseX.set(x);
         mouseY.set(y);
@@ -242,160 +243,166 @@ const HeroSection = () => {
   };
 
   return (
-    <section 
-      ref={containerRef}
-      id="home" 
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden"
-    >
-      {/* Spider Web Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ width: '100%', height: '100%' }}
-      />
-
-      {/* Background Gradient Animation */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-purple-800/30 via-blue-800/30 to-indigo-800/30"
-        animate={{
-          background: [
-            'radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)',
-            'radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 50%)',
-            'radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
-          ],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          repeatType: 'reverse',
-        }}
-      />
-
-      {/* Main Content */}
-      <motion.div 
-        className="text-center z-10 px-4 relative"
-        style={{
-          x: smoothMouseX.get() * 0.02,
-          y: smoothMouseY.get() * 0.02,
-        }}
+    <div>
+      <div>
+        <FlayerLogo />
+      </div>
+      <section
+        ref={containerRef}
+        id="home"
+        className=" flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden py-10"
       >
-        <motion.h1 
-          className="text-5xl md:text-7xl font-bold mb-6 relative"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          whileHover={{ 
-            scale: 1.05,
-            filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5))',
+
+        {/* Spider Web Canvas */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 pointer-events-none"
+          style={{ width: '100%', height: '100%' }}
+        />
+
+        {/* Background Gradient Animation */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-purple-800/30 via-blue-800/30 to-indigo-800/30"
+          animate={{
+            background: [
+              'radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.4) 0%, transparent 50%)',
+            ],
           }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        >
-          <motion.span
-            className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-600 bg-clip-text text-transparent opacity-50"
-            animate={{
-              x: [0, 2, 0],
-              y: [0, -2, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-          >
-          </motion.span>
-          
-          Welcome to the
-          <br />
-          <span className="bg-gradient-to-r from-pink-400 to-purple-600 bg-clip-text text-transparent">
-           assurance broker
-          </span>
-        </motion.h1>
-        
-        <motion.p 
-          className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.2 }}
-          whileHover={{ 
-            scale: 1.02, 
-            color: "#ffffff",
-            filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))'
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+        />
+
+        {/* Main Content */}
+        <motion.div
+          className="text-center z-10 px-4 relative"
+          style={{
+            x: smoothMouseX.get() * 0.02,
+            y: smoothMouseY.get() * 0.02,
           }}
         >
-          Des solutions d’assurance innovantes et personnalisées pour particuliers et entreprises.
-        </motion.p>
-        
-        <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.4 }}
-        >
-          <motion.button
-            onClick={() => scrollToSection('about')}
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300 relative overflow-hidden"
-            whileHover={{ 
-              scale: 1.05, 
-              y: -2,
-              boxShadow: "0 10px 30px rgba(124, 58, 237, 0.4)",
-              filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5))'
+          <motion.h1
+            className="text-5xl md:text-7xl font-bold mb-6 relative"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            whileHover={{
+              scale: 1.05,
+              filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5))',
             }}
-            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-0"
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-            <span className="relative z-10">{t('home.hero.button1')}</span>
-            <motion.div
-              className="relative z-10"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
+            <motion.span
+              className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-600 bg-clip-text text-transparent opacity-50"
+              animate={{
+                x: [0, 2, 0],
+                y: [0, -2, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: 'reverse',
+              }}
             >
-              <ArrowRight size={20} />
-            </motion.div>
-          </motion.button>
-          
-          <motion.button
-            onClick={() => scrollToSection('services')}
-            className="border-2 border-white text-white hover:bg-white hover:text-purple-900 px-8 py-3 rounded-full font-semibold transition-all duration-300 relative overflow-hidden"
-            whileHover={{ 
-              scale: 1.05, 
-              y: -2,
-              borderColor: "#ec4899",
-              color: "#ec4899",
-              boxShadow: "0 0 20px rgba(236, 72, 153, 0.3)"
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-0"
-              whileHover={{ opacity: 0.1 }}
-              transition={{ duration: 0.3 }}
-            />
-            <span className="relative z-10">{t('home.hero.button2')}</span>
-          </motion.button>
-        </motion.div>
-      </motion.div>
+            </motion.span>
 
-      {/* Interactive Scroll Indicator */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-10"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        whileHover={{ 
-          scale: 1.2, 
-          color: "#ec4899",
-          filter: 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.5))'
-        }}
-        onClick={() => scrollToSection('about')}
-      >
-        <ChevronDown size={32} className="text-white opacity-60" />
-      </motion.div>
-    </section>
+            Welcome to the
+            <br />
+            <span className="bg-gradient-to-r from-pink-400 to-purple-600 bg-clip-text text-transparent">
+              assurance broker
+            </span>
+          </motion.h1>
+
+          <motion.p
+            className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.2 }}
+            whileHover={{
+              scale: 1.02,
+              color: "#ffffff",
+              filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))'
+            }}
+          >
+            Des solutions d’assurance innovantes et personnalisées pour particuliers et entreprises.
+          </motion.p>
+
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.4 }}
+          >
+            <motion.button
+              onClick={() => scrollToSection('about')}
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300 relative overflow-hidden"
+              whileHover={{
+                scale: 1.05,
+                y: -2,
+                boxShadow: "0 10px 30px rgba(124, 58, 237, 0.4)",
+                filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5))'
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-0"
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">{t('home.hero.button1')}</span>
+              <motion.div
+                className="relative z-10"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ArrowRight size={20} />
+              </motion.div>
+            </motion.button>
+
+            <motion.button
+              onClick={() => scrollToSection('services')}
+              className="border-2 border-white text-white hover:bg-white hover:text-purple-900 px-8 py-3 rounded-full font-semibold transition-all duration-300 relative overflow-hidden"
+              whileHover={{
+                scale: 1.05,
+                y: -2,
+                borderColor: "#ec4899",
+                color: "#ec4899",
+                boxShadow: "0 0 20px rgba(236, 72, 153, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-0"
+                whileHover={{ opacity: 0.1 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">{t('home.hero.button2')}</span>
+            </motion.button>
+          </motion.div>
+        </motion.div>
+
+        {/* Interactive Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-10"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          whileHover={{
+            scale: 1.2,
+            color: "#ec4899",
+            filter: 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.5))'
+          }}
+          onClick={() => scrollToSection('about')}
+        >
+          <ChevronDown size={32} className="text-white opacity-60" />
+        </motion.div>
+      </section>
+    </div>
   );
 };
 

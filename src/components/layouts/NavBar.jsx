@@ -1,9 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import { href, NavLink, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
-import { UserIcon, Languages, ShieldCloseIcon, Locate, LocateIcon } from "lucide-react";
+import { UserIcon, Languages, ShieldCloseIcon, LocateIcon, Phone, Scale } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LANGUAGES } from "../../constants";
+import ProdPopup from "../ui/ProdPopup";
+import OnLineAssurPopup from "../ui/OnLineAssurPopup";
+
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -15,6 +18,7 @@ const Navbar = () => {
   const sidebarRef = useRef(null);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [showLangPopup, setShowLangPopup] = useState(false);
+  const [showProdPopup, setShowProdPopup] = useState(false);
   const langPopupRef = useRef(null);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
@@ -23,6 +27,7 @@ const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const navbarRef = useRef(null);
   const [navbarOffsetTop, setNavbarOffsetTop] = useState(null);
+  const popupRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -89,7 +94,7 @@ const Navbar = () => {
     },
     {
       label: t("navbar.ourProducts"),
-      href: "/our_products",
+      prod: true,
     },
     {
       label: t("navbar.contact"),
@@ -97,7 +102,7 @@ const Navbar = () => {
     },
     {
       label: "Assurance en ligne",
-      href: "/location",
+      onlineAssur: true,
     },
     {
       label: t("navbar.language"),
@@ -107,8 +112,9 @@ const Navbar = () => {
 
 
   const navItems2 = [
-    {label :t('navbar.login'),
-      href :"/login"
+    {
+      label: t('navbar.login'),
+      href: "/login"
     },
     {
       label: "E-Partener",
@@ -124,7 +130,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setShowBottomBar(scrollY > 50); 
+      setShowBottomBar(scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -385,11 +391,13 @@ const Navbar = () => {
             {showFixedNav && (
               <div className="z-40 transition-opacity duration-300 w-full ">
                 <div className="mx-auto flex justify-between items-center px-4 text-sm">
+                  <div className=" flex text-white">
+                    <Phone className=" hidden sm:flex  md:flex"/>
+                    <p className="text-xl transition hidden sm:flex  md:flex">
+                      (+257) 69 19 00 84 / (+257) 68 25 03 83
+                    </p>
+                  </div>
 
-                  {/* 📞 Gauche : numéro */}
-                  <p className="text-white text-xl hidden sm:block">
-                    📞 01 23 45 67 89
-                  </p>
 
                   {/* Droite : navItems2 + bouton */}
                   <div className="flex items-center space-x-4">
@@ -406,13 +414,16 @@ const Navbar = () => {
 
                     </div>
 
-                    {/* Bouton */}
-                    <button
-                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                      className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2"
-                    >
-                      Comparer vos assurances
-                    </button>
+                    <div className=" flex text-white">
+
+                      <button
+                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2 md:flex"
+                      >
+                       Comparer vos assurances <span> <Scale /> </span> 
+                      </button>
+
+                    </div>
 
                   </div>
                 </div>
@@ -486,6 +497,16 @@ const Navbar = () => {
                       <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
                       <span>{item.label}</span>
                     </button>
+                  ) : item.prod ? (
+                    <div className="relative">
+
+                      <ProdPopup showProdPopup={showProdPopup} popupRef={popupRef} label={item.label} />
+                    </div>
+                  ) : item.onlineAssur ? (
+                    <div className="relative">
+
+                      <OnLineAssurPopup showProdPopup={showProdPopup} popupRef={popupRef} label={item.label} />
+                    </div>
                   ) : item.lang ? (
                     <div className="relative">
                       <button
@@ -558,7 +579,7 @@ const Navbar = () => {
                 height={30}
                 className="object-contain bg-white rounded"
               />
-              <span className="ml-2 text-lg font-bold text-primary">GISA ANALYTICA</span>
+              <span className="ml-2 text-lg font-bold text-primary">ASSURANCE BROKER</span>
             </a>
             <button
               className="text-gray-500 focus:outline-none"
