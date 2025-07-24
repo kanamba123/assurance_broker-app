@@ -153,7 +153,7 @@ export const router = createBrowserRouter([
         element :withPageTransition(lazy(() => import("./pages/NosProduits")))
       },
         {
-        path :"/devis/",
+        path :"/devis/:productName/:id",
         element :withPageTransition(lazy(() => import("./pages/DevisForm")))
       },
       ,

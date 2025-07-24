@@ -80,9 +80,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br px-4 py-8 sm:py-12">
-      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl p-8 sm:p-10 rounded-3xl shadow-2xl">
-        <div className="mb-6 text-center">
+    <div className=" flex my-20  bg-gradient-to-br px-4 ">
+      <div className="w-full max-w-sm  sm:max-w-md md:max-w-lg lg:max-w-xl p-2  sm:p-2 rounded-3xl shadow-2xl">
+        <div className=" text-center">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-primary">{t("login.title")}</h2>
           <p className="mt-2 text-sm text-gray-400">
             {t("login.no_account")}{" "}
@@ -92,7 +92,7 @@ const Login = () => {
           </p>
         </div>
 
-        <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+        <form className="space-y-1" onSubmit={handleSubmit} noValidate>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
               {t("login.email")}
@@ -137,13 +137,13 @@ const Login = () => {
           </div>
         </form>
 
-        <div className="flex items-center my-6">
+        <div className="flex items-center ">
           <div className="flex-grow border-t border-gray-600"></div>
           <span className="mx-4 text-gray-400">{t("login.or")}</span>
           <div className="flex-grow border-t border-gray-600"></div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-1">
           <button
             onClick={handleGoogleLogin}
             className="flex items-center justify-center w-full py-2 px-2 border border-gray-700 rounded-lg bg-white text-black font-medium hover:bg-gray-100 transition"

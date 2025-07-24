@@ -70,9 +70,9 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br  px-4 py-8 sm:py-12">
-      <div className="w-full max-w-md  p-8 sm:p-10 rounded-3xl shadow-2xl">
-        <div className="mb-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Créer un compte</h2>
+      <div className="w-full max-w-xl p-2 rounded-3xl shadow-2xl">
+        <div className="mb-1 text-center">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-primary">Créer un compte</h2>
           <p className="mt-2 text-sm text-gray-400">
             Vous avez déjà un compte ?{" "}
             <Link to="/login" className="font-medium text-primary hover:text-secondary">

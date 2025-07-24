@@ -6,6 +6,9 @@ import { useTranslation } from "react-i18next";
 import { LANGUAGES } from "../../constants";
 import ProdPopup from "../ui/ProdPopup";
 import OnLineAssurPopup from "../ui/OnLineAssurPopup";
+import Login from "../../pages/Login"
+import Register from "../../pages/Register"
+import Modal from "../ui/Modal";
 
 
 const Navbar = () => {
@@ -19,6 +22,8 @@ const Navbar = () => {
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [showLangPopup, setShowLangPopup] = useState(false);
   const [showProdPopup, setShowProdPopup] = useState(false);
+  const [showLogPopup, setShowLogPopup] = useState(false)
+  const [showSubPopup, setShowSubPopup] = useState(false)
   const langPopupRef = useRef(null);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
@@ -114,7 +119,11 @@ const Navbar = () => {
   const navItems2 = [
     {
       label: t('navbar.login'),
-      href: "/login"
+      log: true
+    },
+    {
+      label: t("Inscription"),
+      sub: true
     },
     {
       label: "E-Partener",
@@ -381,6 +390,16 @@ const Navbar = () => {
     </div>
   );
 
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: -50 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
+  };
+
 
   return (
     <div className="w-full relative  z-50 bg-white shadow-sm">
@@ -392,7 +411,7 @@ const Navbar = () => {
               <div className="z-40 transition-opacity duration-300 w-full ">
                 <div className="mx-auto flex justify-between items-center px-4 text-sm">
                   <div className=" flex text-white">
-                    <Phone className=" hidden sm:flex  md:flex"/>
+                    <Phone className=" hidden sm:flex  md:flex" />
                     <p className="text-xl transition hidden sm:flex  md:flex">
                       (+257) 69 19 00 84 / (+257) 68 25 03 83
                     </p>
@@ -405,11 +424,39 @@ const Navbar = () => {
                     {/* navItems2 */}
                     <div className="text-white hidden sm:flex items-center space-x-4">
                       {navItems2.map((item) => (
-
-                        <NavLink key={item.href} to={item.href}>
-                          {item.label}
-                        </NavLink>
-
+                        <lu
+                          key={item.label}
+                          className="relative"
+                          onMouseEnter={() => item.submenu && handleMouseEnter(item.label)}
+                          onMouseLeave={() => item.submenu && handleMouseLeave()}
+                        >
+                          {item.log ? (
+                            <>
+                              <button
+                                onClick={() => setShowLogPopup(true)}
+                                className="flex items-center text-sm lg:text-base"
+                              >
+                                <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                                <span>{item.label}</span>
+                              </button>
+                            </>
+                          ) : item.sub ? (
+                            <>
+                              <button
+                                onClick={() => setShowSubPopup(true)}
+                                className="flex items-center text-sm lg:text-base"
+                              >
+                                <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                                <span>{item.label}</span>
+                              </button>
+                            </>
+                          ) : (
+                            < NavLink key={item.href} to={item.href}>
+                              {item.label}
+                            </NavLink>
+                          )
+                          }
+                        </lu>
                       ))}
 
                     </div>
@@ -418,9 +465,9 @@ const Navbar = () => {
 
                       <button
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                        className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2 md:flex"
+                        className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2 md:flex gap-2"
                       >
-                       Comparer vos assurances <span> <Scale /> </span> 
+                        Comparer vos assurances <span> <Scale /> </span>
                       </button>
 
                     </div>
@@ -697,7 +744,21 @@ const Navbar = () => {
 
       {/* Auth Popup */}
       {showAuthPopup && <AuthPopup />}
-    </div>
+
+      {showLogPopup && (
+        <Modal isOpen={showLogPopup} onClose={() => setShowLogPopup(false)} modalClassName=" bg-gray-100 ">
+          <Login />
+        </Modal>
+      )}
+
+      {showSubPopup && (
+        <Modal isOpen={showSubPopup} onClose={() => setShowSubPopup(false)} 
+          modalClassName=" bg-gray-100 overflow-y-auto">
+          <Register />
+        </Modal>
+      )}
+
+    </div >
   );
 };
 

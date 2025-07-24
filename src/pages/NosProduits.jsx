@@ -7,6 +7,7 @@ import { useCompanyProductsByInfinityPagination } from '../hooks/api/useCompanyP
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import QuoteBox from '../components/ui/QuoteBox';
+import { Scale } from 'lucide-react';
 
 const formatImageUrl = (path) => {
     if (!path) return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxdAOY_-vITFVI-ej84s2U_ErxhOly-z3y_Q&s';
@@ -106,58 +107,46 @@ const NosProduits = () => {
 
             <section
                 id="contact"
-                className="relative  bg-cover bg-center bg-no-repeat "
+                className="relative bg-cover bg-gray-300 bg-center bg-no-repeat  py-10"
 
             >
                 <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
 
-                {/* Contenu */}
-                <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div className="relative mx-auto px-4 sm:px-6 lg:px-20 text-center">
                     <motion.div
+                        className="flex flex-col md:flex-row w-auto items-center text-center md:text-left gap-8"
                         variants={staggerContainer}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
                     >
+                        <motion.div className="flex-1">
+                            <motion.h2
+                                className="text-3xl md:text-3xl font-bold mb-4"
+                                variants={fadeInUp}
+                            >
+                                Trouvez la meilleure assurance pour vous
+                            </motion.h2>
+                            <motion.h2
+                                className="text-base md:text-xl font-normal text-gray-400 max-w-2xl"
+                                variants={fadeInUp}
+                            >
+                                Comparez rapidement les offres des meilleures compagnies d’assurance du marché. Choisissez celle qui correspond à vos besoins et à votre budget.
+                            </motion.h2>
+                        </motion.div>
 
-
-                        <motion.div
-                            className="flex flex-col md:flex-row items-center   text-center md:text-left"
-                            variants={staggerContainer}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, amount: 0.3 }}
-                        >
-                            <motion.div>
-                                <motion.h2
-                                    className="text-3xl md:text-2xl font-bold mb-8"
-                                    variants={fadeInUp}
-                                >
-                                    Trouvez la meilleure assurance pour vous
-                                </motion.h2>
-                                <motion.h2
-                                    className="text-xl md:text-xl font-bold text-primary max-w-2xl"
-                                    variants={fadeInUp}
-                                >
-                                    Comparez rapidement les offres des meilleures compagnies d’assurance du marché. Choisissez celle qui correspond à vos besoins et à votre budget.
-                                </motion.h2>
-                            </motion.div>
-
-
+                        <div className="w-full md:w-auto flex justify-end">
                             <motion.button
-                                className="text-white whitespace-nowrap px-6 py-3 font-semibold bg-primary rounded-full transition-all duration-300"
+                                className="flex gap-1 items-end text-white whitespace-nowrap px-6 py-3 font-semibold bg-blue-500 rounded-xl transition-all duration-300"
                                 variants={fadeInUp}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Comparer maintenant
+                                Comparer maintenant <Scale />
                             </motion.button>
-
-                        </motion.div>
-
-
-
+                        </div>
                     </motion.div>
+
                 </div>
             </section>
 
@@ -174,66 +163,62 @@ const NosProduits = () => {
                     </p>
                 </div>
 
-                <div
-                    className="gap-6 overflow-x-auto pb-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible"
-                >
-                    {companyProducts.map((service, index) => (
-                        <div
-                            key={service.id || index}
-                            data-aos="fade-up"
-                            className="border border-gray-300 rounded-sm overflow-hidden bg-white transition hover:shadow-md"
-                        >
-                            {/* Image */}
-                            <div className="w-full h-40 sm:h-48 md:h-52 lg:h-56 xl:h-60 flex items-center justify-center">
-                                <img
-                                    src={formatImageUrl(service.logo_path)}
-                                    alt={service.name}
-                                    className="object-contain max-h-full "
-                                />
-                            </div>
 
-                            {/* Contenu texte */}
-                            <div className="p-4 sm:p-5 space-y-2 text-gray-800">
-                                <h3 className="text-1xl sm:text-lg font-semibold items-center">
-                                    {service.name}
-                                </h3>
-                                <p className=" text-md  gap-1 leading-relaxed">
-                                    <strong>Prix :</strong> {parseFloat(service.base_price).toLocaleString()} FBU
-                                </p>
-                                <p className="text-base text-gray-600 leading-relaxed">
-                                    {service.description}
-                                </p>
-
-                                {/* <div className="text-sm text-gray-700 space-y-1">
-
-                                    {service.terms_conditions && (
-                                        <p className="flex items-center gap-1 text-xs text-secondary italic">
-                                            {service.terms_conditions}
-                                        </p>
-                                    )}
-                                </div> */}
-
+                <div className="block space-y-1 md:flex md:space-x-1 md:space-y-0">
+                    <div
+                        className="gap-1 overflow-x-auto pb-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible "
+                    >
+                        {companyProducts.map((service, index) => (
+                            <motion.div
+                                key={service.id || index}
+                                data-aos="fade-up"
+                                className="border border-gray-300 rounded-sm overflow-hidden bg-white 
+    transform transition-transform duration-700 ease-in-out 
+    hover:scale-[1.03] hover:shadow-lg"
+                            >
                                 <div>
-                                    <button className="bg-blue-500 hover:bg-blue-600 rounded-md px-2 py-1 text-white">
-                                        Voir plus
-                                    </button>
+                                    <img
+                                        src={formatImageUrl(service.logo_path)}
+                                        alt={service.name}
+                                        className="object-contain max-h-full bg-cover"
+                                    />
                                 </div>
-                            </div>
-                        </div>
-                    ))}
 
-                    <div ref={loaderRef} className="h-4"></div>
+                                <div className="sm:p-5 space-y-2 text-gray-800">
+                                    <h3 className="text-1xl sm:text-lg font-semibold items-center">
+                                        {service.name}
+                                    </h3>
+                                    <p className="text-md gap-1 leading-relaxed">
+                                        <strong>Prix :</strong> {parseFloat(service.base_price).toLocaleString()} FBU
+                                    </p>
+                                    <p className="text-base text-gray-600 leading-relaxed">
+                                        {service.description}
+                                    </p>
 
-                    {isFetchingNextPage && (
-                        <p className="text-center text-gray-500 col-span-full">Chargement...</p>
-                    )}
+                                    <div>
+                                        <button className="bg-blue-500 hover:bg-blue-600 rounded-md px-2 py-1 text-white">
+                                            Voir plus
+                                        </button>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                        ))}
+
+                    </div>
+                    <section className=" bg-gray-50">
+                        <QuoteBox />
+                    </section>
                 </div>
+                <div ref={loaderRef} className="h-4"></div>
+
+                {isFetchingNextPage && (
+                    <p className="text-center text-gray-500 col-span-full">Chargement...</p>
+                )}
             </div>
 
 
-            <section className="flex justify-center items-center min-h-auto my-6 bg-gray-50">
-                <QuoteBox />
-            </section>
+
 
         </section>
     );

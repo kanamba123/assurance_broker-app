@@ -243,10 +243,25 @@ const HeroSection = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div >
+      {/* <div>
         <FlayerLogo />
-      </div>
+      </div> */}
+
+
+      <section
+        id="contact"
+        className="relative w-screen h-screen bg-center bg-no-repeat bg-contain text-primary overflow-hidden"
+        style={{
+          backgroundImage:
+            "url('https://bestassurbrokers.com/assets/img/back/slide/diapositive1.jpg')",
+        }}
+      >
+      </section>
+
+
+
+
       <section
         ref={containerRef}
         id="home"

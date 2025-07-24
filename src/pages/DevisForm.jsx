@@ -1,162 +1,178 @@
-import React, { useState } from 'react';
+
+import { Controller, useForm } from 'react-hook-form';
+import { useCompanyProducts } from "../hooks/api/useCompanyProduct"
+import Select from 'react-select';
+import { useMemo } from 'react';
 
 const DevisForm = () => {
-  const [formData, setFormData] = useState({
-    civilite: '',
-    nom: '',
-    prenom: '',
-    email: '',
-    telephone: '',
-    typeAssurance: '',
-    produitAssurance: '',
-    message: '',
-  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const { data: campanieProducts } = useCompanyProducts();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Données soumises :', formData);
+  const productOptions = useMemo(() => {
+    return (campanieProducts || []).map(product => ({
+      value: product.id,
+      label: product.name,
+    }));
+  }, [campanieProducts]);
+
+
+  const onSubmit = (data) => {
+    console.log('Données soumises :', data);
+    reset();
   };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header bleu */}
+      <section>
+        <div className="bg-bg-dark p-20">
+          <h2 className="text-5xl text-white">Avez-vous un projet ?</h2>
+          <h3 className="text-white text-2xl mt-3">Obtenez votre devis gratuit</h3>
+        </div>
+      </section>
+
       <header className="bg-blue-600 py-8 text-center text-white">
-        <h1 className="text-3xl font-bold">Demande de Devis</h1>
-        <p className="text-sm mt-1">Remplissez ce formulaire pour obtenir un devis personnalisé.</p>
+        <h1 className="text-5xl font-bold">Demande de Devis</h1>
+        <p className="text-md mt-1">Remplissez ce formulaire pour obtenir un devis personnalisé.</p>
       </header>
 
       <main className="flex justify-center py-12 px-4">
         <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-md space-y-4"
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-4xl space-y-4"
         >
-          <h2 className="text-lg font-semibold">Formulaire de demande de devis</h2>
+          <h2 className="text-4xl  font-semibold text-left">Formulaire de demande de devis</h2>
 
           {/* Civilité */}
           <div>
-            <label className="block mb-1 text-sm">Civilité</label>
+            <label className="block mb-1 text-sm text-left">Civilité</label>
             <select
-              name="civilite"
-              value={formData.civilite}
-              onChange={handleChange}
+              {...register('civilite', { required: 'Champ requis' })}
               className="w-full border rounded-md px-3 py-2"
-              required
             >
               <option value="">-- Sélectionnez --</option>
               <option value="Monsieur">Monsieur</option>
               <option value="Madame">Madame</option>
-              <option value="Autre">Autre</option>
+              <option value="mademoiselle">Mademoiselle</option>
+              <option value="personnemorale">Personne morale</option>
             </select>
+            {errors.civilite && <p className="text-red-500 text-sm">{errors.civilite.message}</p>}
           </div>
 
           {/* Nom */}
           <div>
-            <label className="block mb-1 text-sm">Nom</label>
+            <label className="block mb-1 text-sm text-left">Nom</label>
             <input
               type="text"
-              name="nom"
-              value={formData.nom}
-              onChange={handleChange}
+              {...register('nom', { required: 'Champ requis' })}
               className="w-full border rounded-md px-3 py-2"
-              required
             />
+            {errors.nom && <p className="text-red-500 text-sm">{errors.nom.message}</p>}
           </div>
 
           {/* Prénom */}
           <div>
-            <label className="block mb-1 text-sm">Prénom</label>
+            <label className="block mb-1 text-sm text-left">Prénom</label>
             <input
               type="text"
-              name="prenom"
-              value={formData.prenom}
-              onChange={handleChange}
+              {...register('prenom', { required: 'Champ requis' })}
               className="w-full border rounded-md px-3 py-2"
-              required
             />
+            {errors.prenom && <p className="text-red-500 text-sm">{errors.prenom.message}</p>}
           </div>
 
           {/* Email */}
           <div>
-            <label className="block mb-1 text-sm">Adresse e-mail</label>
+            <label className="block mb-1 text-sm text-left">Adresse e-mail</label>
             <input
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
+              {...register('email', {
+                required: 'Email requis',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Email invalide',
+                },
+              })}
               className="w-full border rounded-md px-3 py-2"
-              required
             />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
           </div>
 
           {/* Téléphone */}
           <div>
-            <label className="block mb-1 text-sm">Téléphone</label>
+            <label className="block mb-1 text-sm text-left">Téléphone</label>
             <input
               type="tel"
-              name="telephone"
-              value={formData.telephone}
-              onChange={handleChange}
+              {...register('telephone', { required: 'Champ requis' })}
               className="w-full border rounded-md px-3 py-2"
-              required
             />
+            {errors.telephone && <p className="text-red-500 text-sm">{errors.telephone.message}</p>}
           </div>
 
           {/* Type d'assurance */}
           <div>
-            <label className="block mb-1 text-sm">Type d'assurance</label>
+            <label className="block mb-1 text-sm text-left">Type d'assurance</label>
             <select
-              name="typeAssurance"
-              value={formData.typeAssurance}
-              onChange={handleChange}
+              {...register('typeAssurance', { required: 'Champ requis' })}
               className="w-full border rounded-md px-3 py-2"
-              required
             >
               <option value="">-- Sélectionnez --</option>
-              <option value="Individuelle">Individuelle</option>
-              <option value="Entreprise">Entreprise</option>
+              <option value="Individuelle">Particulier</option>
+              <option value="Entreprise">Compagnie</option>
             </select>
+            {errors.typeAssurance && <p className="text-red-500 text-sm">{errors.typeAssurance.message}</p>}
           </div>
 
           {/* Produit d'assurance */}
           <div>
-            <label className="block mb-1 text-sm">Produit d'assurance</label>
-            <select
+            <label className="block mb-1 text-sm text-left">Produit d'assurance</label>
+            <Controller
               name="produitAssurance"
-              value={formData.produitAssurance}
-              onChange={handleChange}
-              className="w-full border rounded-md px-3 py-2"
-              required
-            >
-              <option value="">-- Sélectionnez --</option>
-              <option value="RC Chef de Famille">RC Chef de Famille</option>
-              <option value="Assurance Auto">Assurance Auto</option>
-              <option value="Habitation">Habitation</option>
-              <option value="Voyage">Voyage</option>
-            </select>
+              control={control}
+              rules={{ required: 'Veuillez sélectionner au moins un produit' }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  // isMulti
+                  options={productOptions}
+                  className="react-select-container w-full text-left text-md"
+                  classNamePrefix="react-select"
+                 
+                  placeholder="Sélectionnez les produits"
+                  closeMenuOnSelect={true}
+                  onChange={(selected) => field.onChange(selected)}
+                  value={field.value}
+                />
+
+              )}
+            />
+            {errors.produitAssurance && (
+              <p className="text-red-500 text-sm">{errors.produitAssurance.message}</p>
+            )}
           </div>
 
-          {/* Message complémentaire */}
+
+          {/* Message */}
           <div>
-            <label className="block mb-1 text-sm">Message / Informations complémentaires</label>
+            <label className="block mb-1 text-sm text-left">Message / Informations complémentaires</label>
             <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows="4"
+              {...register('message')}
+              rows={4}
               className="w-full border rounded-md px-3 py-2"
-            ></textarea>
+            />
           </div>
 
           {/* Bouton */}
-          <div>
+          <div className="flex">
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md items-start hover:bg-blue-700 transition"
             >
               Envoyer ma demande
             </button>
