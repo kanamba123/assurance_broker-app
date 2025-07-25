@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -9,6 +10,7 @@ const HeroSection = () => {
   const canvasRef = useRef(null);
   const nodesRef = useRef([]);
   const { t } = useTranslation();
+  const navigation=useNavigate();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -231,14 +233,14 @@ const HeroSection = () => {
           transition={{ delay: 0.4 }}
         >
           <button
-            onClick={() => scrollToSection('about')}
+            onClick={() => navigation("/devis/assurance-habitation/0")}
             className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-all"
           >
             {t('home.hero.button1')} <ArrowRight size={20} />
           </button>
 
           <button
-            onClick={() => scrollToSection('services')}
+            onClick={() => navigation("/contact")}
             className="border-2 border-white text-white hover:bg-white hover:text-pink-600 px-6 py-3 rounded-full transition-all"
           >
             {t('home.hero.button2')}

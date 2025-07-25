@@ -105,8 +105,8 @@ const Navbar = () => {
 
     if (item.isUserMenu) {
       return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black  z-50 md:absolute md:inset-auto md:right-0 md:top-full md:bg-white md:rounded-lg md:shadow-lg md:w-64">
-          <div className="bg-white rounded-lg w-full max-w-xs mx-4 md:mx-0 md:border md:border-gray-200 relative">
+        <div className="fixed inset-0 flex items-center justify-center  z-50 md:absolute md:inset-auto md:right-0 md:top-full md:bg-white md:rounded-lg md:shadow-lg md:w-64">
+          <div className="bg-primary rounded-lg w-full max-w-xs mx-4 md:mx-0 md:border md:border-gray-200 relative">
 
             {/* Bouton de fermeture */}
             <button
@@ -126,21 +126,21 @@ const Navbar = () => {
                   <UserIcon className="h-5 w-5 text-white" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-medium text-gray-900 text-sm truncate">{user.name || user.email}</p>
-                  <p className="text-xs text-gray-500 truncate">
+                  <p className="font-medium text-white text-sm truncate">{user.name || user.email}</p>
+                  <p className="text-xs text-secondary truncate">
                     {user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'Utilisateur'}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="p-1 space-y-1">
+            <div className="p-1 space-y-1 ">
               <NavLink
                 to="/admin/dashboard/profile"
-                className="flex items-center px-3 py-2 rounded text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
+                className="flex items-center px-3 py-2 rounded text-sm text-white hover:bg-primary hover:text-white transition-colors"
                 onClick={() => setOpenDropdown(null)}
               >
-                <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 Mon profil
@@ -149,10 +149,10 @@ const Navbar = () => {
               {user.role === 'admin' && (
                 <NavLink
                   to="/admin"
-                  className="flex items-center px-3 py-2 rounded text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
+                  className="flex items-center px-3 py-2 rounded text-sm text-white hover:bg-primary hover:text-white transition-colors"
                   onClick={() => setOpenDropdown(null)}
                 >
-                  <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -317,16 +317,6 @@ const Navbar = () => {
                               <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
                               <span>{item.label}</span>
                             </button>
-                            {openDropdown ? (
-                              <div
-                                className="absolute left-0 w-full  bg-white shadow-lg z-500 border-t border-gray-100"
-                                onMouseEnter={() => clearTimeout(timeoutRef.current)}
-                              >
-                                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-                                  {renderDropdownContent()}
-                                </div>
-                              </div>
-                            ) : null}
                           </div>
                         ) : item.sub ? (
                           <>
@@ -604,6 +594,17 @@ const Navbar = () => {
           <Login />
         </Modal>
       )}
+
+      {openDropdown ? (
+        <div
+          className=""
+          onMouseEnter={() => clearTimeout(timeoutRef.current)}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            {renderDropdownContent()}
+          </div>
+        </div>
+      ) : null}
 
       {showSubPopup && (
         <Modal isOpen={showSubPopup} onClose={() => setShowSubPopup(false)}
