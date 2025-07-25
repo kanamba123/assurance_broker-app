@@ -1,79 +1,26 @@
 {
   "about": {
-    "title": "À PROPOS DE NOUS",
+    "title": "Qui sommes-nous ?",
+    "description": "Découvrez notre mission, notre vision et nos services.",
     "whoAreWe": {
       "title": "Qui sommes-nous ?",
-      "description1": "GISA ANALYTICA est un cabinet de conseil stratégique basé au Canada, spécialisé dans l’analyse des politiques publiques et l’intelligence économique appliquée aux marchés émergents, notamment en Afrique. Nous combinons une méthodologie d’intelligence économique systémique et une plateforme biface innovante pour connecter les meilleurs experts aux défis stratégiques des gouvernements, institutions, ONG et investisseurs.",
-      "description2": "GISA ANALYTICA repose sur une double approche : une méthodologie d’intelligence économique systémique et une plateforme biface innovante connectant clients et experts à fort impact"
-    },
-    "analysisIntro": "Notre méthode d’analyse repose sur trois fondements :",
-    "analysis": {
-      "point1": "L’organisation hiérarchisée des flux d’information selon leur pertinence stratégique ;",
-      "point2": "L’intégration des variables invisibles : normes implicites, dynamiques institutionnelles, codes culturels ;",
-      "point3": "La modélisation prospective pour anticiper les ruptures et éclairer la prise de décision.",
-      "highlight": "Notre force : faire émerger la clarté stratégique là où règne l’opacité."
-    },
-    "international": {
-      "title": "Notre positionnement international.",
-      "description1": "Basé au Canada, GISA ANALYTICA agit comme un pont stratégique entre les priorités économiques du Nord et les dynamiques de transformation du Sud global. Nous accompagnons les investisseurs canadiens et internationaux désireux de s'engager dans des investissements responsables en Afrique et dans d'autres marchés émergents, en leur offrant une lecture fine des environnements complexes et des opportunités conformes aux standards internationaux.",
-      "description2": "GISA ANALYTICA repose sur une double approche : une méthodologie d’intelligence économique systémique et une plateforme biface innovante connectant clients et experts à fort impact."
+      "description1": "Nous sommes une plateforme spécialisée dans les services de courtage d’assurance, dédiée à faciliter l’accès à une couverture adaptée pour tous.",
+      "description2": "Notre équipe expérimentée vous accompagne dans la sélection, la gestion et le suivi de vos contrats.",
+      "description3": "Nous croyons en la proximité, l’engagement et l’innovation pour mieux servir nos clients."
     },
     "mission": {
-      "title": "Notre Mission.",
-      "intro": "Notre mission est double :",
-      "point1": "Accompagner les gouvernements, ONG et entreprises africaines dans la structuration de projets lisibles, crédibles et alignés sur les attentes des bailleurs de fonds ;",
-      "point2": "Aider les investisseurs, entreprises et institutions canadiennes à identifier des opportunités durables, sécurisées et stratégiquement pertinentes, grâce à notre approche de conseil stratégique sur mesure.",
+      "title": "Notre vision.",
+      "intro": "Devenir la référence en matière de courtage d’assurance en Afrique de l’Est, grâce à des solutions personnalisées et accessibles. :",
+      "titre1": "Nos valeurs",
+      "point1": "Professionnalisme: Nous assurons un service fiable, rigoureux et confidentiel ;",
+      "point2": "Proximité: Nous restons proches de nos clients pour mieux répondre à leurs besoins ;",
+      "point3": "Engagement: Nous nous engageons à défendre les intérêts de chaque assuré ;",
+      "point4": "Innovation: Nous utilisons des outils modernes pour vous offrir des services efficaces ;",
       "description1": "GISA ANALYTICA agit ainsi comme un accélérateur de convergence entre ambitions locales et exigences globales, en rendant mobilisables des projets à fort potentiel dans des environnements exigeants.",
       "description2": "Là où d’autres perçoivent des zones d’ombre, nous révélons des trajectoires claires et directement actionnables.",
       "description3": "Là où les projets s’enlisent, nous injectons méthode, légitimité et levier d’action pour en libérer la portée stratégique."
     },
-    "models": {
-      "title": "Nos Modèles",
-      "hybridTitle": "Modèle hybride",
-      "hybridDescription": "Notre modèle hybride de conseil stratégique pour les marchés émergents : missions actives + plateforme biface",
-      "hybrid": {
-        "point1": "Les missions actives, fondées sur des réponses ciblées à des appels d’offres gouvernementaux ou institutionnels...",
-        "point2": "La plateforme biface, qui connecte en temps réel les consultants et les clients stratégiques...",
-        "point3": "La modélisation prospective pour anticiper les ruptures et éclairer la prise de décision."
-      },
-      "businessModelTitle": "Modèle économique",
-      "business": {
-        "point1": "Abonnements premium pour les consultants...",
-        "point2": "Facturation à la mission...",
-        "point3": "Formations spécialisées..."
-      }
-    },
-    "security": {
-      "title": "Sécurité et confidentialité",
-      "point1": "Tous nos échanges sont confidentiels.",
-      "point2": "Nous ne percevons aucune commission occulte de la part des partenaires recommandés.",
-      "point3": "Vos données sont sécurisées et traitées selon les meilleurs standards professionnels."
-    },
-    "why": {
-      "title": "Pourquoi choisir GISA ANALYTICA ?",
-      "point1": "Une expertise systémique unique pour les environnements instables ;",
-      "point2": "Des docteurs et consultants hautement qualifiés ;",
-      "point3": "Une vision Nord-Sud ancrée dans l’action concrète ;",
-      "point4": "Une interface humaine efficace en attendant la plateforme automatisée.",
-      "closing": "Nous sommes à votre disposition pour discuter de vos besoins spécifiques et vous proposer des solutions adaptées."
-    },
-    "quick": {
-      "missionTitle": "Notre mission",
-      "missionText": " Offrir des services d'analyse et de conseil de qualité, adaptés aux besoins spécifiques de nos clients.",
-      "visionTitle": "Être la référence incontournable en analyse et conseil au Burundi et dans la région.",
-      "visionText": "Être la référence incontournable..."
-    },
-    "values": {
-      "title": "Nos valeurs",
-      "integrityTitle": "Intégrité",
-      "integrityText": " Transparence et honnêteté dans toutes nos actions.",
-      "innovationTitle": "Innovation",
-      "innovationText": "Recherche constante de solutions innovantes.",
-      "commitmentTitle": "Engagement",
-      "commitmentText": "Accompagnement durable et fiable pour nos clients.",
-      "excellenceTitle": "Excellence",
-      "excellenceText": "Qualité et professionnalisme dans chaque projet."
-    }
+    "ourpartener": "Nos partenaires assureurs"
   },
   "service": {
     "title": "Nos Services",
@@ -124,17 +71,20 @@
     "save": "Enregistrer"
   },
   "contact": {
-    "title": "Contactez-nous",
+    "title": "Laissez un témoignage",
     "name": "Nom",
     "email": "Email",
     "message": "Message",
+    "image": "Lien de l'image (optionnel)",
     "send": "Envoyer",
-    "sending": "Envoi...",
-    "success": "Votre message a été envoyé avec succès.",
-    "error": "Une erreur s’est produite. Veuillez réessayer.",
-    "follow": "Suivez-nous sur les réseaux sociaux",
+    "sending": "Envoi en cours...",
+    "success": "Votre témoignage a été envoyé avec succès.",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
     "errorRequired": "Ce champ est requis.",
-    "errorEmail": "Adresse e-mail invalide."
+    "errorEmail": "Adresse email invalide.",
+    "errorImage": "Lien d'image invalide (jpg, png, gif...).",
+    "follow": "Suivez-nous sur les réseaux sociaux",
+    "latestTestimonials": "Témoignages récents"
   },
   "testimonies": {
     "title": "Témoignages Clients",
@@ -164,7 +114,7 @@
       "subtitle": "Cabinet de conseil stratégique. Plateforme biface. Expertise systémique.",
       "description": "Alliance de la recherche et de la pratique au service de vos décisions.",
       "button": "Nos services",
-      "button1": "Demander un avis",
+      "button1": "Demander un Devis",
       "button2": "Contact-nous"
     },
     "section1": {

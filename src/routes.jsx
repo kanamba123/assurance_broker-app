@@ -21,6 +21,7 @@ const Articles = lazy(() => import("./pages/Articles"));
 const Publications = lazy(() => import("./pages/Publications"));
 const DetailPublications = lazy(() => import("./pages/DetailPublications"));
 const Testimony = lazy(() => import("./pages/Testimony"));
+const Temoigner = lazy(() => import("./pages/temoignage/Temoigner"));
 const ClientCategories = lazy(() => import("./pages/ClientCategories"));
 const Unauthorized = lazy(() => import("./components/Unauthorized"));
 
@@ -66,13 +67,11 @@ const AdminPageReseauSociaux = lazy(() => import("./pages/admin/ReseauxSociauxLi
 //Connexion logs
 const AdminPageConnexionLogs = lazy(() => import("./pages/admin/AdminPageConnexionLogs"));
 
-//message
 const MessageExpert = lazy(() => import("./pages/expert/MessageExpert"));
 const MessageAdmin = lazy(() => import("./pages/admin/MessagePage"));
 
 const Loading = () => <div className="flex justify-center items-center bg-gray-950 text-white">Chargement...</div>;
 
-// Helper function for adding page transitions
 const withPageTransition = (Component) => (
   <Suspense fallback={<Loading />}>
     <PageTransition>
@@ -160,6 +159,10 @@ export const router = createBrowserRouter([
       {
         path: "/testimony",
         element: withPageTransition(Testimony),
+      },
+       {
+        path: "/testimony/add",
+        element: withPageTransition(Temoigner),
       },
       {
         path: "/contact",

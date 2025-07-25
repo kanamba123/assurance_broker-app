@@ -10,7 +10,6 @@ import Login from "../../pages/Login"
 import Register from "../../pages/Register"
 import Modal from "../ui/Modal";
 
-
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const { user, logout } = useAuth();
@@ -25,68 +24,7 @@ const Navbar = () => {
   const [showLogPopup, setShowLogPopup] = useState(false)
   const [showSubPopup, setShowSubPopup] = useState(false)
   const langPopupRef = useRef(null);
-  const [showBottomBar, setShowBottomBar] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState(null);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [showFixedNav, setShowFixedNav] = useState(false);
-  const [isFixed, setIsFixed] = useState(false);
-  const navbarRef = useRef(null);
-  const [navbarOffsetTop, setNavbarOffsetTop] = useState(null);
   const popupRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (mobileMenuOpen && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setMobileMenuOpen(false);
-      }
-      if (showLangPopup && langPopupRef.current && !langPopupRef.current.contains(event.target)) {
-        setShowLangPopup(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [mobileMenuOpen, showLangPopup]);
-
-
-  useEffect(() => {
-    if (!navbarRef.current) return;
-    setNavbarOffsetTop(navbarRef.current.offsetTop);
-  }, [navbarRef]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (navbarOffsetTop === null) return;
-
-      if (window.pageYOffset >= navbarOffsetTop) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [navbarOffsetTop]);
-
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setScrollDirection("down");
-        setShowFixedNav(true);
-      } else if (currentScrollY < lastScrollY) {
-        setScrollDirection("up");
-      }
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-
 
   const navItems = [
     {
@@ -117,13 +55,20 @@ const Navbar = () => {
 
 
   const navItems2 = [
-    {
-      label: t('navbar.login'),
-      log: true
-    },
-    {
+    user
+      ? {
+        label: ` ${user.email}` || t("navbar.account"),
+        log: true,
+        isUserMenu: true,
+      }
+      : {
+        label: t("navbar.login"),
+        log: true,
+      },
+    !user && {
       label: t("Inscription"),
-      sub: true
+      sub: true,
+
     },
     {
       label: "E-Partener",
@@ -134,17 +79,6 @@ const Navbar = () => {
       href: "/contact",
     },
   ];
-
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setShowBottomBar(scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
 
   const handleMouseEnter = (label) => {
@@ -166,73 +100,26 @@ const Navbar = () => {
   };
 
   const renderDropdownContent = () => {
-    const item = navItems.find((i) => i.label === openDropdown);
+    const item = navItems2.find((i) => i.label === openDropdown);
     if (!item) return null;
-
-    if (item.submenu) {
-      const isClientMenu = item.label === t("navbar.clients");
-      const showLimit = 3;
-      const totalItems = item.submenu.length;
-
-      const submenuToRender = isClientMenu
-        ? item.submenu.slice(0, showLimit)
-        : item.submenu;
-
-      const remainingCount = isClientMenu && totalItems > showLimit
-        ? totalItems - showLimit
-        : 0;
-
-      return (
-        <div className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {submenuToRender.map((section) => (
-              <div key={section.title} className="space-y-2">
-                <h3 className="text-primary text-base font-semibold border-b pb-1">
-                  {section.title}
-                </h3>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        className="group block transition"
-                        onClick={() => setOpenDropdown(null)}
-                      >
-
-                        {link.description && (
-                          <p className="text-md mt-1 text-gray-600 group-hover:text-primary group-hover:underline">
-                            {link.description}
-                          </p>
-                        )}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {remainingCount > 0 && (
-            <div className="mt-4 text-sm">
-              <a
-                href="/clientCategorie"
-                onClick={() => setOpenDropdown(null)}
-                className="text-gray-500 italic hover:text-primary transition underline"
-              >
-                ...{remainingCount} {t("navbar.remaining")}
-              </a>
-            </div>
-          )}
-        </div>
-      );
-    }
-
-
 
     if (item.isUserMenu) {
       return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 md:absolute md:inset-auto md:right-0 md:top-full md:mt-2 md:bg-white md:rounded-lg md:shadow-lg md:w-64">
-          <div className="bg-white rounded-lg w-full max-w-xs mx-4 md:mx-0 md:border md:border-gray-200">
+        <div className="fixed inset-0 flex items-center justify-center bg-black  z-50 md:absolute md:inset-auto md:right-0 md:top-full md:bg-white md:rounded-lg md:shadow-lg md:w-64">
+          <div className="bg-white rounded-lg w-full max-w-xs mx-4 md:mx-0 md:border md:border-gray-200 relative">
+
+            {/* Bouton de fermeture */}
+            <button
+              onClick={() => setOpenDropdown(null)}
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition"
+              aria-label="Fermer le menu"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Contenu existant */}
             <div className="p-3 border-b border-gray-100">
               <div className="flex items-center space-x-3">
                 <div className="bg-primary p-2 rounded-full flex-shrink-0">
@@ -390,106 +277,101 @@ const Navbar = () => {
     </div>
   );
 
-  const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
-
-  const modalVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: -50 },
-    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
-  };
-
-
   return (
     <div className="w-full relative  z-50 bg-white shadow-sm">
 
       <div className="block ">
         <div className="bg-primary  px-4 sm:px-6 lg:px-8">
           <div className="flex">
-            {showFixedNav && (
-              <div className="z-40 transition-opacity duration-300 w-full ">
-                <div className="mx-auto flex justify-between items-center px-4 text-sm">
-                  <div className=" flex text-white">
-                    <Phone className=" hidden sm:flex  md:flex" />
-                    <p className="text-xl transition hidden sm:flex  md:flex">
-                      (+257) 69 19 00 84 / (+257) 68 25 03 83
-                    </p>
-                  </div>
+            <div className="z-40 transition-opacity duration-300 w-full ">
+              <div className="mx-auto flex justify-between items-center px-4 text-sm">
+                <div className=" flex text-white">
+                  <Phone className=" hidden sm:flex  md:flex" />
+                  <p className="text-xl transition hidden sm:flex  md:flex">
+                    (+257) 69 19 00 84 / (+257) 68 25 03 83
+                  </p>
+                </div>
+                {/* Droite : navItems2 + bouton */}
+                <div className="flex items-center space-x-4">
 
-
-                  {/* Droite : navItems2 + bouton */}
-                  <div className="flex items-center space-x-4">
-
-                    {/* navItems2 */}
-                    <div className="text-white hidden sm:flex items-center space-x-4">
-                      {navItems2.map((item) => (
-                        <lu
-                          key={item.label}
-                          className="relative"
-                          onMouseEnter={() => item.submenu && handleMouseEnter(item.label)}
-                          onMouseLeave={() => item.submenu && handleMouseLeave()}
-                        >
-                          {item.log ? (
-                            <>
-                              <button
-                                onClick={() => setShowLogPopup(true)}
-                                className="flex items-center text-sm lg:text-base"
-                              >
-                                <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                                <span>{item.label}</span>
-                              </button>
-                            </>
-                          ) : item.sub ? (
-                            <>
-                              <button
-                                onClick={() => setShowSubPopup(true)}
-                                className="flex items-center text-sm lg:text-base"
-                              >
-                                <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                                <span>{item.label}</span>
-                              </button>
-                            </>
-                          ) : (
-                            < NavLink key={item.href} to={item.href}>
-                              {item.label}
-                            </NavLink>
-                          )
-                          }
-                        </lu>
-                      ))}
-
-                    </div>
-
-                    <div className=" flex text-white">
-
-                      <button
-                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                        className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2 md:flex gap-2"
+                  {/* navItems2 */}
+                  <div className="text-white hidden sm:flex items-center space-x-4">
+                    {navItems2.map((item) => (
+                      <lu
+                        key={item.label}
+                        className="relative"
+                        onMouseEnter={() => item.submenu && handleMouseEnter(item.label)}
+                        onMouseLeave={() => item.submenu && handleMouseLeave()}
                       >
-                        Comparer vos assurances <span> <Scale /> </span>
-                      </button>
+                        {item.log ? (
+                          <div>
+                            <button
+                              onClick={() => user
+                                ? (setOpenDropdown(item.label))
+                                : (setShowLogPopup(true))
+                              }
 
-                    </div>
+
+                              className="flex items-center text-sm lg:text-base"
+                            >
+                              <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                              <span>{item.label}</span>
+                            </button>
+                            {openDropdown ? (
+                              <div
+                                className="absolute left-0 w-full  bg-white shadow-lg z-500 border-t border-gray-100"
+                                onMouseEnter={() => clearTimeout(timeoutRef.current)}
+                              >
+                                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                                  {renderDropdownContent()}
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : item.sub ? (
+                          <>
+                            <button
+                              onClick={() => setShowSubPopup(true)}
+                              className="flex items-center text-sm lg:text-base"
+                            >
+                              <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
+                              <span>{item.label}</span>
+                            </button>
+                          </>
+                        ) : (
+                          < NavLink key={item.href} to={item.href}>
+                            {item.label}
+                          </NavLink>
+                        )
+                        }
+                      </lu>
+                    ))}
 
                   </div>
+
+                  <div className=" flex text-white">
+
+                    <button
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2 md:flex gap-2"
+                    >
+                      Comparer vos assurances <span> <Scale /> </span>
+                    </button>
+
+                  </div>
+
                 </div>
               </div>
-            )}
+            </div>
 
           </div>
         </div>
 
-
+        {/* Desktop navBarn item */}
         <div
-          ref={navbarRef}
-          className={`px-4 sm:px-6 lg:px-8 ${isFixed
-            ? "relative top-0 left-0 right-0 z-50 bg-white shadow-md"
-            : "relative left-0 right-0 z-50 bg-white shadow-md"
-            }`}
+          className="px-4 sm:px-6 lg:px-8 relative top-0 left-0 right-0 z-50 bg-white  shadow-md"
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center py-3">
-            {/* Logo */}
             <div className="flex items-center">
               <button
                 className="md:hidden text-gray-600 focus:outline-none mr-2"
@@ -510,8 +392,8 @@ const Navbar = () => {
                 <img
                   src="https://bestassurbrokers.com/public/assets/img/logo.png"
                   alt="Logo"
-                  width={50}
-                  height={50}
+                  width={60}
+                  height={60}
                   className="object-contain bg-white rounded hidden sm:flex"
                 />
                 <span className="ml-2 text-lg font-bold text-primary">ASSURANCE BROKER</span>
@@ -519,7 +401,6 @@ const Navbar = () => {
 
             </div>
 
-            {/* Navigation desktop */}
             <ul className="hidden md:flex space-x-6">
               {navItems.map((item) => (
                 <li
@@ -528,23 +409,7 @@ const Navbar = () => {
                   onMouseEnter={() => item.submenu && handleMouseEnter(item.label)}
                   onMouseLeave={() => item.submenu && handleMouseLeave()}
                 >
-                  {item.isAuth ? (
-                    <button
-                      onClick={() => setShowAuthPopup(true)}
-                      className="flex items-center hover:text-secondary text-sm lg:text-base"
-                    >
-                      <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                      {item.label}
-                    </button>
-                  ) : item.isUserMenu ? (
-                    <button
-                      onClick={() => handleMouseEnter(item.label)}
-                      className="flex items-center hover:text-primary text-sm lg:text-base"
-                    >
-                      <UserIcon className="w-4 h-4 lg:w-5 lg:h-5 mr-1" />
-                      <span>{item.label}</span>
-                    </button>
-                  ) : item.prod ? (
+                  {item.prod ? (
                     <div className="relative">
 
                       <ProdPopup showProdPopup={showProdPopup} popupRef={popupRef} label={item.label} />
@@ -591,18 +456,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Dropdown desktop */}
-          {openDropdown && (
-            <div
-              className="absolute left-0 w-full bg-white shadow-lg z-40 border-t border-gray-100"
-              onMouseEnter={() => clearTimeout(timeoutRef.current)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-                {renderDropdownContent()}
-              </div>
-            </div>
-          )}
+
 
         </div>
       </div>
@@ -752,7 +606,7 @@ const Navbar = () => {
       )}
 
       {showSubPopup && (
-        <Modal isOpen={showSubPopup} onClose={() => setShowSubPopup(false)} 
+        <Modal isOpen={showSubPopup} onClose={() => setShowSubPopup(false)}
           modalClassName=" bg-gray-100 overflow-y-auto">
           <Register />
         </Modal>

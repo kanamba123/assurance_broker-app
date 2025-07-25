@@ -1,5 +1,7 @@
-
 import { motion } from "framer-motion";
+import { CheckCircle, DollarSign } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 
 // Variants d'animation
 const staggerContainer = {
@@ -31,142 +33,143 @@ const scaleIn = {
   visible: { opacity: 1, scale: 1 },
 };
 
-const AboutSection = () => (
-  <section id="about" className="py-20 bg-gray-50 overflow-x-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+const AboutSection = () => {
+  const navigate = useNavigate();
+
+  // Simulation de produit sélectionné, à remplacer par une prop ou un contexte
+  const selectedProduct = useMemo(() => ({
+    label: "Assurance Santé",
+    value: "sante",
+  }), []);
+
+  const handleDevisClick = () => {
+    const labelSlug = selectedProduct.label
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+    navigate(`/devis/${labelSlug}/${selectedProduct.value}`);
+  };
+
+  return (
+    <section id="about" className=" bg-gray-50 overflow-x-hidden">
       <motion.div
-        variants={staggerContainer}
+        className="grid md:grid-cols-2 gap-4 items-center"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true }}
       >
-        <motion.h2
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800"
-          variants={fadeInUp}
-        >
-          Who We Are at BestBrokers
-        </motion.h2>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Contenu Gauche */}
-          <motion.div variants={fadeInLeft}>
-            <motion.h3
-              className="text-xl sm:text-2xl font-semibold mb-6 text-gray-800"
-              variants={fadeInUp}
-            >
-              Expertise & Trust at Your Service
-            </motion.h3>
-
-            <motion.p
-              className="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base"
-              variants={fadeInUp}
-              transition={{ delay: 0.2 }}
-            >
-              At BestBrokers, we connect individuals and businesses with the best insurance solutions tailored to their needs. Our mission is to make insurance simple, transparent, and accessible to everyone.
-            </motion.p>
-
-            <motion.p
-              className="text-gray-600 leading-relaxed mb-8 text-sm sm:text-base"
-              variants={fadeInUp}
-              transition={{ delay: 0.4 }}
-            >
-              Whether it's health, auto, property, or life insurance, our experts guide you every step of the way to ensure you’re always protected with confidence.
-            </motion.p>
-
-            <motion.div
-              className="rounded-2xl overflow-hidden shadow-lg relative max-w-full"
-              variants={scaleIn}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              transition={{ duration: 0.4 }}
-            >
-              <motion.img
-                src="https://images.unsplash.com/photo-1588776814546-ec7e3588c9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                alt="Insurance advisor team"
-                className="w-full h-48 sm:h-64 object-cover"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-0"
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 opacity-0"
-                whileHover={{ opacity: 1, x: 10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <p className="text-sm font-medium text-gray-800">
-                  Your Trusted Advisors
-                </p>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* Statistiques à droite */}
+        <motion.div variants={fadeInLeft} className="flex justify-center items-center">
           <motion.div
-            className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg"
-            variants={fadeInRight}
-            whileHover={{
-              scale: 1.02,
-              y: -5,
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-            }}
-            transition={{ duration: 0.3 }}
+            className="flex justify-center items-center"
+            variants={scaleIn}
+            whileHover={{ scale: 1.05, rotateY: 5 }}
+            transition={{ duration: 0.4 }}
           >
-            <motion.div
-              className="grid grid-cols-2 gap-6"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {[
-                { number: "1,200+", label: "Happy Clients", delay: 0.1 },
-                { number: "99%", label: "Claims Success Rate", delay: 0.2 },
-                { number: "10+", label: "Years of Expertise", delay: 0.3 },
-                { number: "50+", label: "Insurance Partners", delay: 0.4 },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  className="text-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  transition={{
-                    delay: stat.delay,
-                    type: "spring",
-                    stiffness: 300,
-                  }}
-                >
-                  <motion.div
-                    className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2"
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    transition={{
-                      delay: stat.delay,
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 10,
-                    }}
-                  >
-                    {stat.number}
-                  </motion.div>
-                  <motion.p
-                    className="text-gray-600 text-sm"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: stat.delay + 0.2 }}
-                  >
-                    {stat.label}
-                  </motion.p>
-                </motion.div>
-              ))}
-            </motion.div>
+            <motion.img
+              src="https://bestassurbrokers.com/assets/img/why-choose-us.png"
+              alt="Insurance advisor team"
+              className="h-48 sm:h-64 object-contain"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.6 }}
+            />
           </motion.div>
-        </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-white p-4 sm:p-8"
+          variants={fadeInRight}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.h2
+            className="text-xl sm:text-4xl md:text-3xl font-bold mb-12 text-gray-800 text-left"
+            variants={fadeInUp}
+          >
+            Pourquoi choisir Best Digital Insurance Brokers ?
+          </motion.h2>
+
+          <motion.div
+            className="flex flex-col"
+            variants={staggerContainer}
+          >
+            {[
+              "Expertise reconnue et conseils personnalisés",
+              "Solutions innovantes adaptées à chaque profil",
+              "Processus 100% digital et rapide",
+              "Service client réactif et disponible",
+            ].map((point, index) => (
+              <motion.div
+                key={index}
+                className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                variants={fadeInUp}
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{
+                  delay: 0.1 * (index + 1),
+                  type: "spring",
+                  stiffness: 300,
+                }}
+              >
+                <CheckCircle className="text-purple-600 w-5 h-5 mt-1 flex-shrink-0" />
+                <motion.p
+                  className="text-gray-700 text-md text-fon"
+                  // initial={{ opacity: 0 }}
+                  // whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.1 * (index + 1) + 0.1 }}
+                >
+                  {point}
+                </motion.p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <button
+            onClick={() => {
+              navigate("/about")
+            }}
+            className="mt-2 w-auto px-5 flex items-center justify-center gap-2 bg-primary text-white py-2 rounded-md transition"
+          >
+            En savoir plus
+          </button>
+        </motion.div>
       </motion.div>
-    </div>
-  </section>
-);
+
+      <div className="w-full bg-blue-700 py-16 px-6 flex flex-col items-center justify-center text-white text-center">
+        <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
+          Prêt à protéger ce qui compte le plus ?
+        </h2>
+
+        <button
+          onClick={handleDevisClick}
+          className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-md"
+        >
+          Obtenez votre devis gratuit
+        </button>
+      </div>
+
+      <div className="w-full  py-16 px-6 flex flex-col items-center justify-center  text-center">
+        <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
+          Prêt à protéger ce qui compte le plus ?
+        </h2>
+
+        <p className="text-md sm:text-md font-semibold mb-6">
+          N'hésitez pas à nous contacter si vous souhaitez en savoir plus sur nos services ou pour toute autre demande d'assistance.
+        </p>
+
+
+        <button
+          onClick={()=>{
+            navigate("/contact")
+          }}
+          className="flex items-center gap-2 bg-red-700 text-white px-6 py-2 rounded-md hover:bg-primary/90 transition"
+        >
+          Nous contacter
+        </button>
+      </div>
+
+    </section>
+  );
+};
 
 export default AboutSection;

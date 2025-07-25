@@ -2,6 +2,7 @@ import { useTestimonInfinite, useAddTestimony } from "../../hooks/api/useTestimo
 import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useNavigate } from "react-router-dom";
 
 const TestimonialSection = () => {
   const {
@@ -14,6 +15,7 @@ const TestimonialSection = () => {
   const { mutateAsync: addTestimony, isLoading: isAdding } = useAddTestimony();
   const [form, setForm] = useState({ auteur: "", role: "", message: "", image: "" });
   const loaderRef = useRef();
+  const navigation =useNavigate();
 
   useEffect(() => {
     AOS.init({ once: true });
@@ -41,13 +43,13 @@ const TestimonialSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className=" bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900"
           data-aos="fade-up"
         >
-          What Our Clients Say
+          Témoignages
         </h2>
 
         <div className="grid gap-8 md:grid-cols-2">
@@ -104,51 +106,19 @@ const TestimonialSection = () => {
         )}
 
         <div
-          className="max-w-xl mx-auto bg-gray-50 p-6 mt-16 rounded-xl shadow-md"
+          className="max-w-xl mx-auto  p-6 mb-6 "
           data-aos="fade-up"
         >
-          <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">
-            Laisser un témoignage
-          </h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Votre nom"
-              value={form.auteur}
-              onChange={(e) => setForm({ ...form, auteur: e.target.value })}
-              className="w-full p-3 border rounded-lg"
-              required
-            />
-            <input
-              type="text"
-              placeholder="Poste / Fonction"
-              value={form.role}
-              onChange={(e) => setForm({ ...form, role: e.target.value })}
-              className="w-full p-3 border rounded-lg"
-            />
-            <textarea
-              placeholder="Votre témoignage"
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full p-3 border rounded-lg"
-              rows={4}
-              required
-            />
-            <input
-              type="text"
-              placeholder="URL de votre photo (optionnel)"
-              value={form.image}
-              onChange={(e) => setForm({ ...form, image: e.target.value })}
-              className="w-full p-3 border rounded-lg"
-            />
-            <button
+          <button
               type="submit"
               disabled={isAdding}
-              className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition"
+              onClick={()=>{
+                navigation("/testimony/add")
+              }}
+              className="w-auto px-4 bg-blue-500 text-white py-2 rounded-lg hover:bg-primary-dark transition"
             >
-              {isAdding ? "Envoi en cours..." : "Envoyer le témoignage"}
+              Laisser un témoignage
             </button>
-          </form>
         </div>
       </div>
     </section>

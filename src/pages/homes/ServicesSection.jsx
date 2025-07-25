@@ -31,7 +31,6 @@ const ServicesSection = () => {
                     {t('service.title', 'Nos Services')}
                 </h2>
 
-                {/* Container horizontal scroll on small screens */}
                 <div
                     className="flex gap-6 overflow-x-auto pb-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible"
                 >
