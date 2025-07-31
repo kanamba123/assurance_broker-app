@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GitPullRequestIcon, UserIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
+import { GitPullRequestIcon, UserIcon, ChevronDownIcon, ChevronUpIcon, Building, FileCheck2, UsersRound, ReceiptText, Banknote, TriangleAlert, ChartBar, Mail, MessageSquareMore, Settings, Circle, } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -80,77 +80,89 @@ const Sidebar = ({ isOpen, onClose }) => {
       roles: ['admin', 'manager'],
     },
     {
-      name: 'Partenaires',
-      icon: UsersIcon,
-      roles: ['admin'],
-      subItems: [
-        { name: 'Clients', path: '/admin/dashboard/client' },
-        { name: 'Experts', path: '/admin/dashboard/experts' },
-      ]
-    },
-    {
-      name: 'Services',
-      icon: ChartBarIcon,
-      roles: ['admin'],
-      subItems: [
-        { name: 'Service', path: '/admin/dashboard/service' },
-        { name: 'Products ', path: '/admin/dashboard/camponyProducts' },
-        { name: 'Publications', path: '/admin/dashboard/publications' },
-        { name: 'Temoignages', path: '/admin/dashboard/temoignage' },
-        { name: 'Biens', path: '/admin/dashboard/bien' },
-        { name: 'Commandes des bien', path: '/admin/dashboard/commandes' },
-      ]
-    },
-    {
-      name: 'Gestion ',
-      icon: UsersIcon,
-      roles: ['admin'],
-      subItems: [
-        { name: 'Categorie service', path: '/admin/dashboard/service_category' },
-        { name: 'Categorie client', path: '/admin/dashboard/client_category' },
-      ]
-    },
-    {
-      name: 'Clients & Dem',
-      icon: ChartBarIcon,
-      roles: ['admin'],
-      subItems: [
-        { name: 'Demandes', path: '/admin/dashboard/requests' },
-        { name: 'Temoignages', path: '/admin/dashboard/temoignage' },
-        { name: 'Biens', path: '/admin/dashboard/bien' },
-      ]
-    },
-    {
-      name: 'Fincance',
-      icon: ChartBarIcon,
-      roles: ['admin'],
-      subItems: [
-        { name: 'Paiements', path: '/admin/dashboard/payment' },
-        { name: 'Transaction', path: '/admin/dashboard/transaction' },
-        { name: 'Facture', path: '/admin/dashboard/facture' },
-        { name: 'Commande', path: '/admin/dashboard/commande' },
-      ]
-    },
-
-    {
-      name: 'Outils',
-      icon: ShoppingBagIcon,
+      name: 'Compagnies',
+      icon: Building,
+      path: '/admin/dashboard/compagnies',
       roles: ['admin', 'manager'],
+    },
+    {
+      name: 'Assurances',
+      icon: FileCheck2,
+      roles: ['admin'],
       subItems: [
-        { name: 'Donnees et analytics', path: '/admin/dashboard/analytics' },
-        { name: 'Messages', path: '/admin/dashboard/message' },
-        { name: 'Notification', path: '/admin/dashboard/notification' },
-        { name: 'messagecontact', path: '/admin/dashboard/messagecontact' },
-        { name: 'Reseaux sociaux', path: '/admin/dashboard/reseaux' },
-        { name: 'Parametre', path: '/admin/dashboard/settings' },
-        { name: 'Logs connexion', path: '/admin/dashboard/logsconnexion' },
+        { name: 'Catégories assurance', icon: Circle, path: '/admin/dashboard/categoriesassurance' },
+        { name: 'Branches', path: '/admin/dashboard/branches' },
+        { name: 'Polices assurances', path: '/admin/dashboard/polices_assurances' },
+        { name: 'Primes Ratio', path: '/admin/dashboard/primesratio' },
+        { name: 'Nos produits', path: '/admin/dashboard/camponyProducts' },
+        { name: 'Catégories ', path: '/admin/dashboard/service_category' },
       ]
     },
     {
-      name: 'Analytique',
-      icon: ChartBarIcon,
-      path: '/admin/dashboard/stats',
-      roles: ['admin']
+      name: 'Clients',
+      icon: UsersRound,
+      path: '/admin/dashboard/clients',
+      roles: ['admin', 'manager'],
+    },
+    {
+      name: 'Contract & Devis',
+      icon: ReceiptText,
+      roles: ['admin'],
+      subItems: [
+        { name: 'Simulations', path: '/admin/dashboard/simulations' },
+        { name: 'Contracts', path: '/admin/dashboard/contracts' },
+        { name: 'Devis', path: '/admin/dashboard/devis' },
+      ]
+    },
+    {
+      name: 'Commitions',
+      icon: ReceiptText,
+      roles: ['admin'],
+      subItems: [
+        { name: 'Taux commissions', path: '/admin/dashboard/tauxcommissions' },
+        { name: 'Commission', path: '/admin/dashboard/commission' }
+      ]
+    },
+    {
+      name: 'Paiements',
+      icon: Banknote,
+      path: '/admin/dashboard/paiements',
+      roles: ['admin', 'manager'],
+    },
+    {
+      name: 'Sinistres',
+      icon: TriangleAlert,
+      path: '/admin/dashboard/sinistres',
+      roles: ['admin', 'manager'],
+    },
+    {
+      name: 'Statistiques/Rapports',
+      icon: ChartBar,
+      roles: ['admin'],
+      subItems: [
+        { name: 'Sinistres/primes', path: '/admin/dashboard/service' },
+        { name: 'Données analytics ', path: '/admin/dashboard/donneesanalytic' },
+        { name: 'Données analytics2', path: '/admin/dashboard/donneesanalytic2' },
+        { name: 'Publications', path: '/admin/dashboard/publications' },
+      ]
+    },
+    {
+      name: 'Messages',
+      icon: Mail,
+      path: '/admin/dashboard/message',
+      roles: ['admin', 'manager'],
+    },
+    {
+      name: 'Temoignages',
+      icon: MessageSquareMore,
+      path: '/admin/dashboard/temoignage',
+      roles: ['admin', 'manager'],
+    },
+    {
+      name: 'Paramettres',
+      icon: Settings,
+      path: '/admin/dashboard/settings',
+      roles: ['admin', 'manager'],
     },
     {
       name: 'Utilisateurs',
@@ -201,7 +213,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                       className={`flex items-center justify-between w-full p-3 rounded-lg transition-colors ${expandedMenus[item.name] ? ' text-white' : 'text-gray-300  hover:text-white'}`}
                     >
                       <div className="flex items-center">
-                        <item.icon />
+                        <item.icon className=' tex-xs'/>
                         <span className="ml-3">{item.name}</span>
                       </div>
                       {expandedMenus[item.name] ? <ChevronUpIcon size={16} /> : <ChevronDownIcon size={16} />}
@@ -220,7 +232,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                                 `flex items-center p-2 rounded-lg transition-colors ${isActive ? ' text-white' : 'text-gray-300 hover:text-white'}`
                               }
                               onClick={onClose} // Fermer le sidebar sur mobile lors du clic
-                            >
+                            > 
                               {subItem.name}
                               {location.pathname === subItem.path && (
                                 <span className="ml-auto h-2 w-2 rounded-full bg-secondary"></span>

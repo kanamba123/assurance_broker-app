@@ -10,13 +10,19 @@ import {
   useDeleteTestimony,
   useUploadTestimonyImage
 } from '../../hooks/api/useTestimony';
+import ActionBar from '../../components/ui/ActionBar';
+import Pagination from '../../components/ui/Pagination';
 
 const TemoignageList = () => {
   const { data: temoignages = [], isLoading, error } = useTestimony();
   const addTemoignageMutation = useAddTestimony();
   const updateTemoignageMutation = useUpdateTestimony();
   const deleteTemoignageMutation = useDeleteTestimony();
-   const uploadImageMutation = useUploadTestimonyImage();
+  const uploadImageMutation = useUploadTestimonyImage();
+  const [searchText, setSearchText] = useState('');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const [showModal, setShowModal] = useState(false);
   const [editingTemoignage, setEditingTemoignage] = useState(null);
@@ -26,6 +32,17 @@ const TemoignageList = () => {
     image: '',
     auteur: '',
   });
+
+  const filteredTemoignage = temoignages.filter((c) =>
+    c.auteur.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const totalItems = filteredTemoignage.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = filteredTemoignage.slice(startIndex, endIndex);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -93,12 +110,12 @@ const TemoignageList = () => {
   };
 
 
-    const handleImageUpload = async (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       try {
-        const { image_url} = await uploadImageMutation.mutateAsync(file);
-        setFormData(prev => ({ ...prev,image: image_url }));
+        const { image_url } = await uploadImageMutation.mutateAsync(file);
+        setFormData(prev => ({ ...prev, image: image_url }));
       } catch (err) {
         console.error("Erreur lors de l'upload de l'image", err);
       }
@@ -107,100 +124,113 @@ const TemoignageList = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto p-4">
+      <div className="max-w-9xl mx-auto p-4">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-secondary">Gestion des témoignages</h1>
+          <h1 className="text-3xl font-bold">Gestion des témoignages</h1>
+        </div>
+        <div className='p-4 bg-white border-t-4 border-blue-600 rounded-t-md'>
+
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded shadow transition"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-1 mb-3 rounded shadow transition"
             disabled={isLoading}
           >
             <FaPlus /> Ajouter un témoignage
           </button>
-        </div>
 
-        {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          </div>
-        ) : error ? (
-          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
-            <p className="font-bold">Erreur</p>
-            <p>Impossible de charger les témoignages</p>
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-primary text-white">
-                  <tr>
-                    <th className=" py-3 t text-xs font-medium uppercase tracking-wider">ID</th>
-                    <th className=" py-3 t text-xs font-medium uppercase tracking-wider">Utilisateur</th>
-                    <th className=" py-3 t text-xs font-medium uppercase tracking-wider">Message</th>
-                    <th className=" py-3 t text-xs font-medium uppercase tracking-wider">Note</th>
-                    <th className=" py-3 t text-xs font-medium uppercase tracking-wider">Date</th>
-                    <th className=" py-3 t text-xs font-medium uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {temoignages.map((temoignage) => (
-                    <tr key={temoignage.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {temoignage.id}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                            <FaUser className="text-blue-800" />
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {temoignage.user?.name || 'Anonyme'}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              {temoignage.user?.email || ''}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-gray-900 line-clamp-2">
-                          <FaComment className="inline mr-2 text-blue-500" />
-                          {temoignage.message}
-                        </div>
-                      </td>
-                      <td className="px-6 align-middle whitespace-nowrap">
-                        {renderStars(parseInt(temoignage.note))}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <FaCalendarAlt className="inline mr-1" />
-                        {new Date(temoignage.date_posted).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() => handleEdit(temoignage)}
-                            className="text-blue-600 hover:text-blue-900"
-                            title="Modifier"
-                          >
-                            <FaEdit />
-                          </button>
-                          <button
-                            onClick={() => handleDelete(temoignage.id)}
-                            className="text-red-600 hover:text-red-900"
-                            title="Supprimer"
-                          >
-                            <FaTrash />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <ActionBar
+            data={filteredTemoignage}
+            searchQuery={searchText}
+            onSearchChange={setSearchText}
+            title="Compagnies"
+          />
+
+          {isLoading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
             </div>
-          </div>
-        )}
+          ) : error ? (
+            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+              <p className="font-bold">Erreur</p>
+              <p>Impossible de charger les témoignages</p>
+            </div>
+          ) : (
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="overflow-x-auto">
+               <table className="table-auto w-full border border-gray-300">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className=" border border-gray-300 px-4 py-2 text-left">ID</th>
+                      <th className=" border border-gray-300 px-4 py-2 text-left">Utilisateur</th>
+                      <th className=" border border-gray-300 px-4 py-2 text-left">Message</th>
+                      <th className=" border border-gray-300 px-4 py-2 text-left">Date</th>
+                      <th className=" border border-gray-300 px-4 py-2 text-left">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {currentItems.map((temoignage) => (
+                      <tr key={temoignage.id} className="odd:bg-gray-100 even:bg-white hover:bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-2 text-sm">
+                          {temoignage.id}
+                        </td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
+                              <FaUser className="text-blue-800" />
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900">
+                                {temoignage.user?.name || 'Anonyme'}
+                              </div>
+                              <div className="text-sm text-gray-500">
+                                {temoignage.user?.email || ''}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm">
+                          <div className="text-sm text-gray-900 line-clamp-2">
+                            <FaComment className="inline mr-2 text-blue-500" />
+                            {temoignage.message}
+                          </div>
+                        </td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm">
+                          <FaCalendarAlt className="inline mr-1" />
+                          {new Date(temoignage.date_posted).toLocaleDateString()}
+                        </td>
+                        <td className="border border-gray-300 px-4 py-2 text-sm">
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => handleEdit(temoignage)}
+                              className="text-blue-600 hover:text-blue-900"
+                              title="Modifier"
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(temoignage.id)}
+                              className="text-red-600 hover:text-red-900"
+                              title="Supprimer"
+                            >
+                              <FaTrash />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={(page) => setCurrentPage(page)}
+            itemsPerPage={itemsPerPage}
+            totalItems={totalItems}
+          />
+        </div>
       </div>
 
       {/* Modal pour ajouter/modifier un témoignage */}
@@ -232,7 +262,7 @@ const TemoignageList = () => {
                 />
               </div>
 
-               <div>
+              <div>
                 <label className="block font-medium mb-1">Auteur*</label>
                 <input
                   name="auteur"

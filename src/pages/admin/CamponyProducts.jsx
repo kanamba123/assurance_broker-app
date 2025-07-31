@@ -11,6 +11,8 @@ import {
 } from '../../hooks/api/useCompanyProduct';
 import { useInsuranceCompanies } from '../../hooks/api/useInsuranceCompany';
 import { useInsuranceTypes } from '../../hooks/api/useInsuranceType';
+import ActionBar from '../../components/ui/ActionBar';
+import Pagination from '../../components/ui/Pagination';
 
 const CompanyProducts = () => {
   const { data: products = [], isLoading, error } = useCompanyProducts();
@@ -20,6 +22,10 @@ const CompanyProducts = () => {
   const updateProductMutation = useUpdateCompanyProduct();
   const deleteProductMutation = useDeleteCompanyProduct();
   const uploadImageMutation = useUploadCompanyProductImage();
+  const [searchText, setSearchText] = useState('');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const [showModal, setShowModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
@@ -51,12 +57,24 @@ const CompanyProducts = () => {
     if (file) {
       try {
         const { image_url } = await uploadImageMutation.mutateAsync(file);
-        setFormData(prev => ({ ...prev, image_path:image_url }));
+        setFormData(prev => ({ ...prev, image_path: image_url }));
       } catch (err) {
         console.error("Erreur lors de l'upload de l'image", err);
       }
     }
   };
+
+
+  const filteredProducts = products.filter((c) =>
+    c.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const totalItems = filteredProducts.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = filteredProducts.slice(startIndex, endIndex)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -118,51 +136,70 @@ const CompanyProducts = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto p-4">
+      <div className="max-w-9xl mx-auto p-4">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-secondary">Produits de l'entreprise</h1>
+          <h1 className="text-3xl font-bold text-black">Produits de l'entreprise</h1>
+
+        </div>
+
+        <div className='p-4 bg-white border-t-4 border-blue-600 rounded-t-md'>
+
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded shadow hover:bg-primary-dark"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-1 mb-3 rounded shadow transition"
           >
             <FaPlus /> Ajouter un produit
           </button>
-        </div>
 
-        {isLoading ? (
-          <div className="text-center">Chargement...</div>
-        ) : error ? (
-          <div className="text-red-500">Erreur lors du chargement des produits</div>
-        ) : (
-          <table className="w-full table-auto bg-white rounded shadow overflow-hidden">
-            <thead className="bg-primary text-white">
-              <tr>
-                <th className="px-4 py-2">Nom</th>
-                <th className="px-4 py-2">Code</th>
-                <th className="px-4 py-2">Prix</th>
-                <th className="px-4 py-2">Commission</th>
-                <th className="px-4 py-2">Actif</th>
-                <th className="px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((p) => (
-                <tr key={p.id} className="border-t">
-                  <td className="px-4 py-2">{p.name}</td>
-                  <td className="px-4 py-2">{p.product_code}</td>
-                  <td className="px-4 py-2"><FaEuroSign className="inline mr-1" /> {p.base_price}</td>
-                  <td className="px-4 py-2">{p.commission_rate} %</td>
-                  <td className="px-4 py-2">{p.is_active ? 'Oui' : 'Non'}</td>
-                  <td className="px-4 py-2 space-x-2">
-                    <button onClick={() => handleEdit(p)} title="Modifier" className="text-blue-600 hover:text-blue-800"><FaEdit /></button>
-                    <button onClick={() => handleOpenImageModal(p)} title="Image" className="text-purple-600 hover:text-purple-800"><FaImages /></button>
-                    <button onClick={() => handleDelete(p.id)} title="Supprimer" className="text-red-600 hover:text-red-800"><FaTrash /></button>
-                  </td>
+          <ActionBar
+            data={filteredProducts}
+            searchQuery={searchText}
+            onSearchChange={setSearchText}
+            title="Product "
+          />
+
+          {isLoading ? (
+            <div className="text-center">Chargement...</div>
+          ) : error ? (
+            <div className="text-red-500">Erreur lors du chargement des produits</div>
+          ) : (
+            <table className="table-auto w-full border border-gray-300">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="border border-gray-300 px-4 py-2 text-left">Nom</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">Code</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">Prix</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">Commission</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">Actif</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+              </thead>
+              <tbody>
+                {currentItems.map((p) => (
+                  <tr key={p.id} className="odd:bg-gray-100 even:bg-white hover:bg-gray-50">
+                    <td className="border border-gray-300 px-4 py-2">{p.name}</td>
+                    <td className="border border-gray-300 px-4 py-2">{p.product_code}</td>
+                    <td className="border border-gray-300 px-4 py-2"><FaEuroSign className="inline mr-1" /> {p.base_price}</td>
+                    <td className="border border-gray-300 px-4 py-2">{p.commission_rate} %</td>
+                    <td className="border border-gray-300 px-4 py-2">{p.is_active ? 'Oui' : 'Non'}</td>
+                    <td className="border border-gray-300 px-4 py-2 space-x-2">
+                      <button onClick={() => handleEdit(p)} title="Modifier" className="text-blue-600 hover:text-blue-800"><FaEdit /></button>
+                      <button onClick={() => handleOpenImageModal(p)} title="Image" className="text-purple-600 hover:text-purple-800"><FaImages /></button>
+                      <button onClick={() => handleDelete(p.id)} title="Supprimer" className="text-red-600 hover:text-red-800"><FaTrash /></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={(page) => setCurrentPage(page)}
+            itemsPerPage={itemsPerPage}
+            totalItems={totalItems}
+          />
+        </div>
       </div>
 
       {showModal && (

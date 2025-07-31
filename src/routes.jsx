@@ -30,6 +30,9 @@ const AdminDashboard = lazy(() => import("./pages/admin/DashboardAdmin"));
 const DashboardExpert = lazy(() => import("./pages/expert/DashboardExpert"));
 const DashboardUser = lazy(() => import("./pages/client/DashboardUser"));
 const AdminUsers = lazy(() => import("./pages/admin/UserList"));
+const AdminCompagnies = lazy(() => import("./pages/admin/CompagniesList"));
+const AdminInsuranceTypes = lazy(() => import("./pages/admin/InsuranceTypeList"));
+
 const AdminExperts = lazy(() => import("./pages/admin/ExpertList"));
 const AdminClients = lazy(() => import("./pages/admin/ClientList"));
 const AdminService = lazy(() => import("./pages/admin/ServiceList"));
@@ -148,19 +151,23 @@ export const router = createBrowserRouter([
         element: withPageTransition(DetailPublications),
       },
       {
-        path :"/products/:entrepriseName/",
-        element :withPageTransition(lazy(() => import("./pages/NosProduits")))
+        path: "/products/:entrepriseName/",
+        element: withPageTransition(lazy(() => import("./pages/NosProduits")))
       },
-        {
-        path :"/devis/:productName/:id",
-        element :withPageTransition(lazy(() => import("./pages/DevisForm")))
+      {
+        path: "/epartener/",
+        element: withPageTransition(lazy(() => import("./pages/Partenaires")))
+      },
+      {
+        path: "/devis/:productName/:id",
+        element: withPageTransition(lazy(() => import("./pages/DevisForm")))
       },
       ,
       {
         path: "/testimony",
         element: withPageTransition(Testimony),
       },
-       {
+      {
         path: "/testimony/add",
         element: withPageTransition(Temoigner),
       },
@@ -206,7 +213,7 @@ export const router = createBrowserRouter([
             element: withPageTransition(lazy(() => import("./pages/admin/Overview"))),
           },
           {
-            path: "client",
+            path: "clients",
             element: withPageTransition(AdminClients),
           },//Test
           {
@@ -232,6 +239,11 @@ export const router = createBrowserRouter([
           {
             path: "users",
             element: withPageTransition(AdminUsers),
+          },
+          
+          {
+            path: "compagnies",
+            element: withPageTransition(AdminCompagnies),
           },
           {
             path: "profile",
@@ -269,7 +281,11 @@ export const router = createBrowserRouter([
             path: "camponyProducts",
             element: withPageTransition(AdminCamponyProducts),
           },
-             {
+           {
+            path: "categoriesassurance",
+            element: withPageTransition(AdminInsuranceTypes),
+          },
+          {
             path: "messagecontact",
             element: withPageTransition(MessageContactPage),
           },

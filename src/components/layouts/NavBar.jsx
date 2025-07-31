@@ -284,10 +284,10 @@ const Navbar = () => {
         <div className="bg-primary  px-4 sm:px-6 lg:px-8">
           <div className="flex">
             <div className="z-40 transition-opacity duration-300 w-full ">
-              <div className="mx-auto flex justify-between items-center px-4 text-sm">
+              <div className="mx-auto flex justify-between items-center px-4 ">
                 <div className=" flex text-white">
-                  <Phone className=" hidden sm:flex  md:flex" />
-                  <p className="text-xl transition hidden sm:flex  md:flex">
+                  <Phone className=" text-xl hidden sm:flex  md:flex" />
+                  <p className="text-xl transition hidden sm:flex  md:flex md:text-sm">
                     (+257) 69 19 00 84 / (+257) 68 25 03 83
                   </p>
                 </div>
@@ -343,7 +343,7 @@ const Navbar = () => {
 
                     <button
                       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                      className="text-white text-xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex m-2 md:flex gap-2"
+                      className="text-white text-1xl bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-900 transition hidden sm:flex md:text-sm m-2 md:flex gap-2"
                     >
                       Comparer vos assurances <span> <Scale /> </span>
                     </button>
@@ -600,7 +600,7 @@ const Navbar = () => {
           className=""
           onMouseEnter={() => clearTimeout(timeoutRef.current)}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             {renderDropdownContent()}
           </div>
         </div>

@@ -17,6 +17,8 @@
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-http-backend": "^3.0.2",
     "i18next-localstorage-backend": "^4.2.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.525.0",
     "motion": "^12.23.6",
     "postcss": "^8.5.6",
@@ -30,7 +32,8 @@
     "react-router-dom": "^7.7.0",
     "react-select": "^5.10.2",
     "recharts": "^3.1.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

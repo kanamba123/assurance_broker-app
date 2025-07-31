@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { FaPlus, FaTimes, FaEdit, FaTrash, FaUserShield, FaUser } from 'react-icons/fa';
-import { useUsers, useUpdateUser, useDeleteUser, useAddUser } from '../../hooks/api/useUsers';
+import { useInsuranceCompanies, useUpdateInsuranceCompany, useDeleteInsuranceCompany, useAddInsuranceCompany } from '../../hooks/api/useInsuranceCompany';
 import ActionBar from '../../components/ui/ActionBar';
 import Pagination from '../../components/ui/Pagination';
 
-const UserList = () => {
-  const { data: users = [], isLoading, error, refetch } = useUsers();
-  const addUserMutation = useAddUser();
-  const updateUserMutation = useUpdateUser();
-  const deleteUserMutation = useDeleteUser();
+const CompagniesList = () => {
+  const { data: camponies = [], isLoading, error, refetch } = useInsuranceCompanies();
+  const addCompanyMutation = useAddInsuranceCompany();
+  const updateCompanyMutation = useUpdateInsuranceCompany();
+  const deleteUserMutation = useDeleteInsuranceCompany();
   const [searchText, setSearchText] = useState('');
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const [showModal, setShowModal] = useState(false);
-  const [editingUser, setEditingUser] = useState(null);
+  const [editingCompay, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,24 +31,23 @@ const UserList = () => {
     }));
   };
 
-  const filteredUsers = users.filter((user) =>
-    user?.first_name?.toLowerCase().includes(searchText.toLowerCase()) ||
-    user?.last_name?.toLowerCase().includes(searchText.toLowerCase())
+  const filteredCompanies = camponies.filter((c) =>
+    c.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  const totalItems = filteredUsers.length;
+  const totalItems = filteredCompanies.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = filteredUsers.slice(startIndex, endIndex)
+  const currentItems = filteredCompanies.slice(startIndex, endIndex);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const mutation = editingUser ? updateUserMutation : addUserMutation;
-    const data = editingUser
-      ? { ...formData, Id_Utilisateur: editingUser.Id_Utilisateur }
+    const mutation = editingCompay ? updateCompanyMutation : addCompanyMutation;
+    const data = editingCompay
+      ? { ...formData, Id_Utilisateur: editingCompay.Id_Utilisateur }
       : formData;
 
     mutation.mutate(data, {
@@ -64,14 +63,14 @@ const UserList = () => {
     });
   };
 
-  const handleEdit = (user) => {
-    setEditingUser(user);
+  const handleEdit = (company) => {
+    setEditingUser(company);
     setFormData({
-      nom: user.nom,
-      prenom: user.prenom,
-      email: user.email,
-      role: user.rôle || 'user',
-      statut: user.statut || 'actif'
+      nom: company.nom,
+      prenom: company.prenom,
+      email: company.email,
+      role: company.rôle || 'user',
+      statut: company.statut || 'actif'
     });
     setShowModal(true);
   };
@@ -86,25 +85,11 @@ const UserList = () => {
     }
   };
 
-  const getRoleBadge = (role) => {
-    switch (role) {
-      case 'admin':
-        return <span className="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs flex items-center gap-1">
-          <FaUserShield /> Admin
-        </span>;
-      default:
-        return <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs flex items-center gap-1">
-          <FaUser /> Utilisateur
-        </span>;
-    }
-  };
-
   const getStatusBadge = (status) => {
-    console.log("Etat :",status)
     switch (status) {
-      case 'activé':
+      case '1':
         return <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Actif</span>;
-      case 'inactif':
+      case '0':
         return <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">Inactif</span>;
       default:
         return <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Inconnu</span>;
@@ -114,9 +99,8 @@ const UserList = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br ">
       <div className="max-w-9xl mx-auto">
-
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Gestion des utilisateurs</h1>
+          <h1 className="text-3xl font-bold">Compagnies d'assurance</h1>
         </div>
         <div className='p-4 bg-white border-t-4 border-blue-600 rounded-t-md'>
           <button
@@ -124,15 +108,16 @@ const UserList = () => {
             className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-1 mb-3 rounded shadow transition"
             disabled={isLoading}
           >
-            <FaPlus /> Ajouter un utilisateur
+            <FaPlus />  Ajouter une compagnie
           </button>
 
           <ActionBar
-            data={filteredUsers}
+            data={filteredCompanies}
             searchQuery={searchText}
             onSearchChange={setSearchText}
-            title="Users"
+            title="Compagnies"
           />
+
 
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
@@ -146,73 +131,74 @@ const UserList = () => {
           ) : (
             <div className=" rounded-lg shadow overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-primary">
+                <table className="table-auto w-full border border-gray-300">
+                  <thead className="bg-gray-50">
                     <tr>
+                      <th className="border border-gray-300 px-4 py-2 text-left">Logo</th>
                       <th className="border border-gray-300 px-4 py-2 text-left">Nom</th>
                       <th className="border border-gray-300 px-4 py-2 text-left">Email</th>
-                      <th className="border border-gray-300 px-4 py-2 text-left">Rôle</th>
                       <th className="border border-gray-300 px-4 py-2 text-left">Statut</th>
                       <th className="border border-gray-300 px-4 py-2 text-left">Date d'inscription</th>
                       <th className="border border-gray-300 px-4 py-2 text-left">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white  divide-y divide-gray-200 ">
-                    {currentItems.map((user) => (
-                      <tr key={user.Id_Utilisateur} className="hover:bg-secondary">
-                        <td className="border border-gray-300 px-4 py-2 text-sm">
+
+                  <tbody className="bg-white  divide-y divide-gray-200 "
+                    onMouseLeave={() => {
+                      document
+                        .querySelectorAll(".col-hover")
+                        .forEach((cell) => cell.classList.remove("highlight-col"));
+                    }}>
+                    {currentItems.map((company) => (
+
+                      <tr key={company.id} className="odd:bg-gray-100 even:bg-white hover:bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-2 text-sm ">
+                          {company?.logo_path}
+                        </td>
+                        <td className="border border-gray-300 px-4 py-2">
                           <div className="flex items-center">
                             <div className="ml-4">
                               <div className="text-sm font-medium ">
-                                {user.first_name} {user.last_name}
+                                {company.name}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="border border-gray-300 px-4 py-2 text-sm  ">
-                          {user.email}
+                        <td className="border border-gray-300 px-4 py-2 text-sm ">
+                          {company.email}
                         </td>
-                        <td className="border border-gray-300 px-4 py-2 text-sm">
-                          {getRoleBadge(user.role)}
+                        <td className="border border-gray-300 px-4 py-2">
+                          {getStatusBadge(company.is_active)}
                         </td>
-                        <td className="border border-gray-300 px-4 py-2 text-sm">
-                          {getStatusBadge(user.status)}
+                        <td className="border border-gray-300 px-4 py-2 text-sm ">
+                          {new Date(company.created_at).toLocaleDateString()}
                         </td>
-                        <td className="border border-gray-300 px-4 py-2 text-sm  ">
-                          {new Date(user.created_at).toLocaleDateString()}
-                        </td>
-                        <td className="border border-gray-300 px-4 py-2 text-sm  font-medium">
-                          <div className="flex space-x-2 gap-1.5">
+                        <td className="border border-gray-300 px-4 py-2 text-sm font-medium">
+                          <div className="flex space-x-2">
                             <button
-                              onClick={() => handleEdit(user)}
-                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                              onClick={() => handleEdit(company)}
+                              className="text-white bg-action-edit px-2 py-1 rounded-sm"
                               title="Modifier"
                             >
-                              <FaEdit />
+                              Modifier
                             </button>
                             <button
-                              onClick={() => handleDelete(user.Id_Utilisateur)}
-                              className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                              onClick={() => handleDelete(company.id)}
+                              className="bg-action-delete text-white px-2 py-1 rounded-sm"
                               title="Supprimer"
-                              disabled={user.rôle === 'admin'}
+                              disabled={company.rôle === 'admin'}
                             >
-                              <FaTrash />
-                            </button>
-
-                            <button
-                              onClick={() => handleDelete(user.Id_Utilisateur)}
-                              className="bg-amber-300 hover:bg-amber-400 py-1 px-2 rounded-xs "
-                              title="Supprimer"
-                              disabled={user.rôle === 'admin'}
-                            >
-                              Désactiver
+                              Suprimer
                             </button>
                           </div>
                         </td>
                       </tr>
                     ))}
                   </tbody>
+
                 </table>
+
+
               </div>
             </div>
           )}
@@ -224,6 +210,7 @@ const UserList = () => {
             totalItems={totalItems}
           />
         </div>
+
       </div>
 
       {/* Modal pour ajouter/modifier un utilisateur */}
@@ -240,7 +227,7 @@ const UserList = () => {
               <FaTimes size={18} />
             </button>
             <h2 className="text-xl font-bold mb-4">
-              {editingUser ? 'Modifier utilisateur' : 'Ajouter un utilisateur'}
+              {editingCompay ? 'Modifier utilisateur' : 'Ajouter un utilisateur'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -294,7 +281,7 @@ const UserList = () => {
                   </select>
                 </div>
               </div>
-              {!editingUser && (
+              {!editingCompay && (
                 <div>
                   <label className="block font-medium mb-1">Mot de passe</label>
                   <input
@@ -302,7 +289,7 @@ const UserList = () => {
                     name="password"
                     onChange={handleInputChange}
                     className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500  dark:border-gray-700"
-                    required={!editingUser}
+                    required={!editingCompay}
                   />
                 </div>
               )}
@@ -320,12 +307,12 @@ const UserList = () => {
                 <button
                   type="submit"
                   className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded flex items-center gap-2"
-                  disabled={addUserMutation.isLoading || updateUserMutation.isLoading}
+                  disabled={addCompanyMutation.isLoading || updateCompanyMutation.isLoading}
                 >
-                  {addUserMutation.isLoading || updateUserMutation.isLoading ? (
+                  {addCompanyMutation.isLoading || updateCompanyMutation.isLoading ? (
                     <span className="animate-spin">↻</span>
                   ) : (
-                    <span>{editingUser ? 'Mettre à jour' : 'Enregistrer'}</span>
+                    <span>{editingCompay ? 'Mettre à jour' : 'Enregistrer'}</span>
                   )}
                 </button>
               </div>
@@ -337,4 +324,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default CompagniesList;

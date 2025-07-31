@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="flex items-center space-x-3">
             <a href="/" className="text-1xl font-bold text-primary gap-3 flex items-left">
               <img
-                // src="https://static.wixstatic.com/media/591562_e80aea7a733d400da8350fbfb583107b~mv2.png/v1/fill/w_96,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/591562_e80aea7a733d400da8350fbfb583107b~mv2.png"
+                src="https://bestassurbrokers.com/public/assets/img/logo.png"
                 alt="Logo"
                 width={30}
                 height={30}
@@ -108,11 +108,11 @@ const Footer = () => {
       <div className="border-t border-gray-700 mt-12 pt-6 px-4 text-sm text-gray-500">
         <div className="mb-4">
           <span>
-            © {year} Gisa Analytica
+            © {year} Best Digital Insurance Brokers
           </span>
           <p>
             <Trans i18nKey="footer.poweredBy">
-              - Powered by <a href="https://gisaanalytica.com" className="hover:text-primary">Gisa Analytica</a>
+              - Powered by <a href="https://gisaanalytica.com" className="hover:text-primary">Best Digital Insurance Brokers</a>
             </Trans>
           </p>
         </div>

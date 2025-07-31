@@ -23,8 +23,18 @@ export const AuthProvider = ({ children }) => {
         setUser(newUser);
         setIsAuthenticated(true);
         startInactivityTimer(); // Démarrer le timer après login
+
+        // 🔔 Notifier toute l'application (événement personnalisé)
+        window.dispatchEvent(new CustomEvent("app-login", {
+            detail: { token: newToken, user: newUser }
+        }));
+
+        // 🔁 (Facultatif) Synchronisation cross-onglet via localStorage
+        localStorage.setItem("login-event", Date.now()); // délenche storage event dans autres onglets
+
         return newUser;
     };
+
 
     // Fonction de logout
     const logout = useCallback(() => {
@@ -34,8 +44,12 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         setIsAuthenticated(false);
         setShowWarning(false);
-        console.log("Vous etes deconnecte ruben")
+
+        window.dispatchEvent(new Event("app-logout"));
+
+        window.location.reload();
     }, []);
+
 
     // Détection d'inactivité
     const startInactivityTimer = useCallback(() => {

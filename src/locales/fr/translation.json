@@ -70,6 +70,10 @@
     "cancel": "Annuler",
     "save": "Enregistrer"
   },
+  "partener":{
+   "our_partener":"Nos partenaires assureurs",
+   "title1":"Des partenaires fiables pour vous accompagner"
+  },
   "contact": {
     "title": "Laissez un témoignage",
     "name": "Nom",
@@ -156,11 +160,11 @@
     "gdpr": "RGPDs",
     "terms": "Conditions d'utilisation",
     "paymentsTitle": "Paiements acceptés",
-    "poweredBy": "- Propulsé par <0>Gisa Analytica</0>",
-    "excellenceText": "Nous aidons les entreprises à concevoir, développer et lancer des produits numériques innovants."
+    "poweredBy": "- Propulsé par <0>Best Digital Insurance Brokers</0>",
+    "excellenceText": "Société Anonyme de courtage et de conseils en ASSURANCE et de REASSURANCE. Votre courtier en Assurance en ligne et accompagnateur dans le choix d'une meilleure protection assurée."
   },
   "globals": {
-    "appName": "GISA ANALYTICA Inc.",
+    "appName": "Best Digital Insurance Brokers.",
     "tagline": "Alliance de la recherche et de la pratique au service de vos décisions.",
     "ctaContact": "Nous contacter",
     "ctaLearnMore": "En savoir plus",
