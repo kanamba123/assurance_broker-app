@@ -14,7 +14,7 @@ const Navbar = ({ onMenuClick, className }) => {
       const refreshToken = localStorage.getItem("refresh_token");
 
       if (refreshToken) {
-        // Appel API logout pour invalider le refresh token côté serveur
+        
         await axios.post(
           `${config.API_BASE_URL}/logout`,
           { refresh_token: refreshToken },
@@ -25,29 +25,23 @@ const Navbar = ({ onMenuClick, className }) => {
           }
         );
 
-        // Si on arrive ici, c’est que la déconnexion serveur a réussi
         localStorage.removeItem("authToken");
         localStorage.removeItem("refresh_token");
         localStorage.removeItem("user");
 
-        // Rediriger vers la page de login
         navigate("/login");
       } else {
-        // Pas de refresh token trouvé en local
         console.warn("Aucun refresh token trouvé, impossible de déconnecter côté serveur");
-        // Tu peux gérer un fallback ici si tu veux
       }
     } catch (error) {
       console.error("Erreur lors de la déconnexion :", error);
-      // Ici on ne fait pas le nettoyage ni la redirection
-      // Tu peux afficher un message ou laisser comme ça
     }
   };
 
 
   return (
     <header className={`${className} z-10`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-0 sm:px-6 md:px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Mobile menu button */}
           <div className="flex items-center md:hidden">

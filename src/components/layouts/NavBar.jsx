@@ -359,7 +359,7 @@ const Navbar = () => {
 
         {/* Desktop navBarn item */}
         <div
-          className="px-4 sm:px-6 lg:px-8 relative top-0 left-0 right-0 z-50 bg-white  shadow-md"
+          className="sticky top-0 px-4 sm:px-6 lg:px-8   left-0 right-0 z-50 bg-white  shadow-md"
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center py-3">
             <div className="flex items-center">

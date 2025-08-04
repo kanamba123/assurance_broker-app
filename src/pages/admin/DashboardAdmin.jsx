@@ -9,7 +9,7 @@ const DashboardAdmin = () => {
   const { user, logout, showWarning } = useAuth();
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="block h-screen bg-gray-100 md:flex ">
       {/* Sidebar - Toujours visible en desktop */}
       <div >
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
